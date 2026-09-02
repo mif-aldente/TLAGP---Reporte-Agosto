@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard · Agosto 2026 · TLAGP</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ──────────────────────────────────── */
+:root {
+  --navy:    #1E2B45;
+  --navy2:   #141D30;
+  --navy3:   #263354;
+  --gold:    #B89A5E;
+  --gold2:   #D4B87A;
+  --steel:   #5F6E84;
+  --steel2:  #8397B2;
+  --snow:    #F4F3F0;
+  --white:   #FFFFFF;
+  --border:  rgba(30,43,69,.10);
+  --teal:    #1B856E;
+  --teal-bg: #E2F3EE;
+  --red:     #A83030;
+  --red-bg:  #FAECEC;
+  --txt:     #1E2B45;
+  --txt2:    #5F6E84;
+  --txt3:    #8397B2;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; }
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  color: var(--txt);
+  background: var(--snow);
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  grid-template-rows: 56px 1fr;
+  font-size: 13px;
+}
+
+/* ─── TOPBAR ──────────────────────────────────── */
+.topbar {
+  grid-column: 1 / -1;
+  background: var(--navy2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px 0 0;
+  border-bottom: 1px solid rgba(184,154,94,.25);
+  position: sticky; top: 0; z-index: 100;
+}
+.tb-brand {
+  display: flex; align-items: center;
+  width: 230px; padding: 0 18px;
+  height: 56px;
+  border-right: 1px solid rgba(255,255,255,.06);
+  gap: 10px;
+}
+.tb-logo-svg { width: 34px; height: 34px; flex-shrink: 0; }
+.tb-name {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900; font-size: 10px;
+  color: #fff; line-height: 1.3;
+  letter-spacing: .02em;
+}
+.tb-name span { display: block; color: var(--gold); font-size: 8.5px; font-weight: 400; letter-spacing: .04em; }
+.tb-center {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px; font-weight: 700;
+  color: var(--gold); letter-spacing: .12em; text-transform: uppercase;
+}
+.tb-right { display: flex; align-items: center; gap: 14px; }
+.period {
+  background: rgba(184,154,94,.15);
+  border: 1px solid rgba(184,154,94,.3);
+  border-radius: 4px; padding: 3px 10px;
+  font-size: 11px; color: var(--gold); font-weight: 500;
+}
+.prep { font-size: 10px; color: rgba(255,255,255,.3); }
+
+/* ─── SIDEBAR ─────────────────────────────────── */
+.sidebar {
+  background: var(--navy);
+  position: sticky; top: 56px;
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+  display: flex; flex-direction: column;
+  border-right: 1px solid rgba(255,255,255,.04);
+}
+.nav-group { padding: 18px 10px 6px; }
+.nav-group-label {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,.28); padding: 0 6px; margin-bottom: 4px;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 10px; margin: 1px 0;
+  border-radius: 5px;
+  font-size: 12px; color: rgba(255,255,255,.6);
+  cursor: pointer; text-decoration: none;
+  transition: background .12s, color .12s;
+}
+.nav-item:hover { background: rgba(255,255,255,.06); color: #fff; }
+.nav-item.active { background: rgba(184,154,94,.18); color: var(--gold); }
+.nav-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(255,255,255,.18); flex-shrink: 0;
+}
+.nav-item.active .nav-dot { background: var(--gold); }
+
+/* ─── MAIN ────────────────────────────────────── */
+.main { overflow-y: auto; display: flex; flex-direction: column; }
+section[id] { scroll-margin-top: 0; }
+
+/* ─── SECTION WRAPPER ─────────────────────────── */
+.s { padding: 20px 22px; border-bottom: 1px solid var(--border); }
+.s:last-child { border-bottom: none; }
+.s-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; }
+.s-title { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700; color: var(--navy); }
+.s-sub { font-size: 11px; color: var(--txt3); }
+
+/* ─── KPI STRIP ───────────────────────────────── */
+.kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 8px; overflow: hidden;
+}
+.kpi { background: var(--white); padding: 13px 14px; }
+.kpi.dk { background: var(--navy); }
+.kpi.ac { background: var(--gold); }
+.kpi .v {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(18px, 2vw, 26px); font-weight: 900;
+  line-height: 1; margin-bottom: 3px;
+}
+.kpi .l { font-size: 9.5px; font-weight: 500; text-transform: uppercase; letter-spacing: .06em; line-height: 1.35; }
+.kpi .ss { font-size: 9.5px; margin-top: 2px; }
+.kpi.dk .v { color: var(--gold); }
+.kpi.dk .l { color: rgba(255,255,255,.38); }
+.kpi.dk .ss { color: rgba(255,255,255,.25); }
+.kpi.ac .v { color: var(--navy2); }
+.kpi.ac .l { color: rgba(20,29,48,.5); }
+.kpi.ac .ss { color: rgba(20,29,48,.38); }
+.kpi .v { color: var(--navy); }
+.kpi .l { color: var(--txt3); }
+
+/* ─── GRID LAYOUTS ────────────────────────────── */
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.g21 { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; }
+.g12 { display: grid; grid-template-columns: 1fr 2fr; gap: 12px; }
+
+/* ─── PANEL ───────────────────────────────────── */
+.panel { background: var(--white); border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
+.ph { padding: 10px 13px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.ph h3 { font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 700; color: var(--navy); }
+.ph .phr { font-size: 10px; color: var(--txt3); }
+.pb { padding: 12px 13px; }
+.pb0 { padding: 0; }
+
+/* ─── TABLE ───────────────────────────────────── */
+.t { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+.t thead tr { background: var(--navy); }
+.t th { padding: 7px 10px; text-align: left; font-family: 'Poppins', sans-serif; font-size: 8.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
+.t th.r { text-align: right; }
+.t td { padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--txt); vertical-align: middle; }
+.t td.r { text-align: right; color: var(--txt2); }
+.t td.b { font-family: 'Poppins', sans-serif; font-weight: 700; }
+.t td.hi { color: var(--gold); font-weight: 700; font-family: 'Poppins', sans-serif; }
+.t td.gr { color: var(--teal); font-weight: 500; }
+.t td.rd { color: var(--red); }
+.t tbody tr:nth-child(even) { background: rgba(244,243,240,.7); }
+.t tbody tr.hl { background: rgba(184,154,94,.07) !important; }
+.t tbody tr.hl td:first-child { border-left: 2px solid var(--gold); }
+.t tbody tr.tot td { background: rgba(30,43,69,.05); font-family: 'Poppins', sans-serif; font-weight: 700; }
+.t tbody tr:last-child td { border-bottom: none; }
+
+/* ─── TAGS ────────────────────────────────────── */
+.tag { display: inline-block; padding: 1px 7px; border-radius: 99px; font-size: 9px; font-weight: 700; letter-spacing: .03em; }
+.tag.g { background: rgba(27,133,110,.12); color: var(--teal); }
+.tag.r { background: var(--red-bg); color: var(--red); }
+.tag.s { background: rgba(95,110,132,.1); color: var(--steel); }
+.tag.a { background: rgba(184,154,94,.14); color: #6b4e10; }
+
+/* ─── BAR CHART ───────────────────────────────── */
+.bc { display: flex; flex-direction: column; gap: 6px; }
+.br { display: grid; grid-template-columns: 118px 1fr 58px; align-items: center; gap: 8px; }
+.bl { font-size: 11px; color: var(--txt); text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bt { background: var(--snow); border-radius: 3px; overflow: hidden; height: 9px; }
+.bf { height: 100%; border-radius: 3px; }
+.bf.go { background: var(--gold); }
+.bf.na { background: var(--navy); }
+.bf.te { background: var(--teal); }
+.bf.st { background: var(--steel); }
+.bv { font-size: 10.5px; color: var(--txt3); font-variant-numeric: tabular-nums; }
+
+/* ─── CALLOUT ─────────────────────────────────── */
+.co { border-radius: 5px; padding: 8px 11px; font-size: 11px; line-height: 1.5; }
+.co.go { background: rgba(184,154,94,.1); border-left: 2px solid var(--gold); }
+.co.te { background: var(--teal-bg); border-left: 2px solid var(--teal); }
+.co.na { background: rgba(30,43,69,.06); border-left: 2px solid var(--navy); }
+.co.rd { background: var(--red-bg); border-left: 2px solid var(--red); }
+.co strong { font-weight: 700; color: var(--navy); }
+.co.go strong { color: #6b4e10; }
+.co.te strong { color: var(--teal); }
+.co.rd strong { color: var(--red); }
+
+/* ─── FUNNEL ──────────────────────────────────── */
+.funnel { display: flex; flex-direction: column; align-items: center; }
+.fs { width: 100%; display: flex; flex-direction: column; align-items: center; }
+.fb {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px; height: 52px;
+  clip-path: polygon(0 0, 100% 0, 97% 100%, 3% 100%);
+}
+.fn { font-family: 'Poppins', sans-serif; font-size: 11.5px; font-weight: 700; color: #fff; }
+.fn.dk { color: var(--navy2); }
+.fsub { font-size: 9.5px; color: rgba(255,255,255,.6); }
+.fsub.dk { color: rgba(20,29,48,.55); }
+.fv { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 900; color: var(--gold); white-space: nowrap; }
+.fv.dk { color: var(--navy2); }
+.fcon { height: 10px; display: flex; align-items: center; justify-content: center; position: relative; width: 100%; }
+.fcon::before { content: ''; width: 1px; height: 100%; background: rgba(30,43,69,.15); }
+.fpct { position: absolute; right: 18%; font-size: 9px; font-weight: 700; color: var(--txt3); background: var(--snow); padding: 0 5px; border-radius: 2px; }
+
+/* ─── MINI KPI ────────────────────────────────── */
+.mk3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.mk { background: rgba(30,43,69,.04); border: 1px solid var(--border); border-radius: 6px; padding: 9px 11px; }
+.mkv { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 900; color: var(--navy); line-height: 1; }
+.mkv.go { color: var(--gold); }
+.mkl { font-size: 9.5px; color: var(--txt3); margin-top: 3px; line-height: 1.3; }
+
+/* ─── REC ─────────────────────────────────────── */
+.rec { display: flex; gap: 9px; padding: 9px 0; border-bottom: 1px solid var(--border); }
+.rec:last-child { border-bottom: none; padding-bottom: 0; }
+.rn { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 900; color: var(--gold); width: 16px; flex-shrink: 0; }
+.rt { font-family: 'Poppins', sans-serif; font-size: 11.5px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+.rd { font-size: 10.5px; color: var(--txt2); line-height: 1.5; }
+
+/* ─── DEVICE ──────────────────────────────────── */
+.devs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.dev { border: 1px solid var(--border); border-radius: 6px; padding: 10px; text-align: center; background: var(--snow); }
+.dv { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 900; color: var(--navy); }
+.dl { font-size: 9.5px; color: var(--txt3); margin-top: 2px; }
+
+/* ─── FOOTER ──────────────────────────────────── */
+.footer {
+  background: var(--navy2); padding: 10px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 10px; color: rgba(255,255,255,.3);
+}
+
+/* ─── SCROLLBARS ──────────────────────────────── */
+.main::-webkit-scrollbar { width: 4px; }
+.main::-webkit-scrollbar-thumb { background: rgba(30,43,69,.18); border-radius: 2px; }
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.08); }
+
+@media (max-width: 900px) {
+  body { grid-template-columns: 1fr; grid-template-rows: 56px auto 1fr; }
+  .sidebar { position: relative; height: auto; flex-direction: row; overflow-x: auto; padding: 6px 10px; }
+  .nav-group { padding: 0; display: flex; flex-direction: row; gap: 2px; align-items: center; }
+  .nav-group-label { display: none; }
+  .kpi-strip { grid-template-columns: repeat(4, 1fr); }
+  .g2, .g21, .g12 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="tb-brand">
+    <!-- Logo TLAGP en SVG embebido -->
+    <svg class="tb-logo-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Columnas superiores -->
+      <rect x="30" y="18" width="140" height="10" rx="2" fill="#B89A5E"/>
+      <rect x="45" y="33" width="110" height="7" rx="2" fill="#B89A5E"/>
+      <!-- Escudo / shield TLAGP simplificado -->
+      <path d="M40 50 L100 50 L160 50 L160 110 Q160 155 100 175 Q40 155 40 110 Z" fill="#B89A5E" opacity=".15"/>
+      <!-- L -->
+      <path d="M52 65 L52 140 L90 140 L90 128 L66 128 L66 65 Z" fill="var(--navy2)"/>
+      <!-- G -->
+      <path d="M100 65 Q148 65 148 105 Q148 145 100 145 Q80 145 70 132 L82 124 Q88 134 100 134 Q136 134 136 105 Q136 76 100 76 Q88 76 82 82 L82 98 L108 98 L108 110 L70 110 L70 82 Q80 65 100 65 Z" fill="var(--navy2)"/>
+    </svg>
+    <div class="tb-name">
+      THE LEGAL AGENCY<br>GROUP PANAMÁ
+      <span>Asesoría legal a tu alcance</span>
+    </div>
+  </div>
+  <div class="tb-center">Dashboard · Agosto 2026</div>
+  <div class="tb-right">
+    <span class="period">1 – 30 agosto 2026</span>
+    <span class="prep">Al Dente Marketing Studio</span>
+  </div>
+</header>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="nav-group">
+    <div class="nav-group-label">Google Ads</div>
+    <a href="#resumen" class="nav-item active"><div class="nav-dot"></div>Resumen general</a>
+    <a href="#campanas" class="nav-item"><div class="nav-dot"></div>Campañas</a>
+    <a href="#keywords" class="nav-item"><div class="nav-dot"></div>Palabras clave</a>
+    <a href="#geo" class="nav-item"><div class="nav-dot"></div>Geografía</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Conversión</div>
+    <a href="#funnel" class="nav-item"><div class="nav-dot"></div>Funnel de marketing</a>
+    <a href="#leads" class="nav-item"><div class="nav-dot"></div>Leads y acciones</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Sitio web GA4</div>
+    <a href="#ga4" class="nav-item"><div class="nav-dot"></div>Analytics</a>
+    <a href="#paginas" class="nav-item"><div class="nav-dot"></div>Páginas</a>
+    <a href="#canales" class="nav-item"><div class="nav-dot"></div>Canales</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Cierre</div>
+    <a href="#leads-data" class="nav-item"><div class="nav-dot"></div>Leads reales (58)</a>
+    <a href="#recs" class="nav-item"><div class="nav-dot"></div>Recomendaciones</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- ① RESUMEN -->
+  <section class="s" id="resumen">
+    <div class="s-head">
+      <div class="s-title">Resumen general — Google Ads</div>
+      <div class="s-sub">Cuenta 523-163-4262 · 3 de 13 campañas con gasto real en agosto</div>
+    </div>
+    <div class="kpi-strip">
+      <div class="kpi dk"><div class="v">28,021</div><div class="l">Impresiones</div></div>
+      <div class="kpi dk"><div class="v">1,561</div><div class="l">Clics</div></div>
+      <div class="kpi dk"><div class="v">5.57%</div><div class="l">CTR promedio</div></div>
+      <div class="kpi dk"><div class="v">US$0.23</div><div class="l">CPC promedio</div></div>
+      <div class="kpi ac"><div class="v">136</div><div class="l">Conversiones</div><div class="ss">atribuidas a clics</div></div>
+      <div class="kpi ac"><div class="v">US$2.64</div><div class="l">Costo / conv.</div><div class="ss">promedio cuenta</div></div>
+      <div class="kpi"><div class="v">US$359.55</div><div class="l">Inversión total</div></div>
+      <div class="kpi"><div class="v">3 / 13</div><div class="l">Campañas activas</div><div class="ss">10 pausadas/eliminadas</div></div>
+    </div>
+  </section>
+
+  <!-- ② CAMPAÑAS -->
+  <section class="s" id="campanas">
+    <div class="s-head">
+      <div class="s-title">Campañas</div>
+      <div class="s-sub">Una campaña = 74% inversión + 99% conversiones</div>
+    </div>
+    <div class="panel" style="margin-bottom:10px">
+      <div class="pb0">
+        <table class="t">
+          <thead>
+            <tr>
+              <th>Campaña</th><th>Estado</th>
+              <th class="r">Impr.</th><th class="r">Clics</th><th class="r">CTR</th>
+              <th class="r">Inversión</th><th class="r">Conv.</th>
+              <th class="r">% Conv.</th><th class="r">CPC</th><th class="r">$/conv.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="hl">
+              <td class="b">Campaña Junio 2026 – Español LATAM</td>
+              <td><span class="tag g">Activa</span></td>
+              <td class="r">19,187</td><td class="r">1,189</td>
+              <td class="r hi">6.20%</td><td class="r">US$264.93</td>
+              <td class="r hi">135</td><td class="r hi">11.35%</td>
+              <td class="r">US$0.22</td><td class="r hi">US$1.96</td>
+            </tr>
+            <tr>
+              <td>Branding-Home-PTY</td>
+              <td><span class="tag s">Detenida</span></td>
+              <td class="r">7,638</td><td class="r">328</td>
+              <td class="r">4.29%</td><td class="r">US$36.31</td>
+              <td class="r rd">0</td><td class="r">0.00%</td>
+              <td class="r">US$0.11</td><td class="r">—</td>
+            </tr>
+            <tr>
+              <td>Search_Migracion_Inglés USA/CAN</td>
+              <td><span class="tag r">Detenida</span></td>
+              <td class="r">1,196</td><td class="r">~44</td>
+              <td class="r">3.68%</td><td class="r">US$58.31</td>
+              <td class="r">1</td><td class="r">2.27%</td>
+              <td class="r">US$1.33</td><td class="r">US$58.31</td>
+            </tr>
+            <tr class="tot">
+              <td colspan="2">TOTAL</td>
+              <td class="r">28,021</td><td class="r">1,561</td>
+              <td class="r">5.57%</td><td class="r">US$359.55</td>
+              <td class="r">136</td><td class="r">8.71%</td>
+              <td class="r">US$0.23</td><td class="r">US$2.64</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="co go">🚦 La campaña LATAM opera con <strong>US$9.90/día</strong> y nivel de optimización <strong>57.9%</strong>. Google la marca como <em>limitada por volumen de búsquedas</em> — hay margen real para escalar.</div>
+  </section>
+
+  <!-- ③ KEYWORDS -->
+  <section class="s" id="keywords">
+    <div class="s-head">
+      <div class="s-title">Palabras clave</div>
+      <div class="s-sub">De 623 keywords, un grupo reducido genera el 100% del rendimiento</div>
+    </div>
+    <div class="g2">
+      <div class="panel">
+        <div class="ph"><h3 style="color:var(--teal)">✅ Las que convirtieron</h3><span class="phr">tasa de conversión</span></div>
+        <div class="pb">
+          <div class="bc">
+            <div class="br"><div class="bl">abogados de migracion</div><div class="bt"><div class="bf te" style="width:100%"></div></div><div class="bv">66.67% ⭐</div></div>
+            <div class="br"><div class="bl">visa residente panama</div><div class="bt"><div class="bf te" style="width:57%"></div></div><div class="bv">38.24%</div></div>
+            <div class="br"><div class="bl">asesoria migratoria</div><div class="bt"><div class="bf te" style="width:55%"></div></div><div class="bv">36.36%</div></div>
+            <div class="br"><div class="bl">panama migración</div><div class="bt"><div class="bf go" style="width:52%"></div></div><div class="bv">34.36%</div></div>
+            <div class="br"><div class="bl">residencia permanente</div><div class="bt"><div class="bf go" style="width:45%"></div></div><div class="bv">30.00%</div></div>
+            <div class="br"><div class="bl">servicios migratorios</div><div class="bt"><div class="bf go" style="width:25%"></div></div><div class="bv">16.98%</div></div>
+          </div>
+          <div class="co te" style="margin-top:9px"><strong>"abogados de migracion en panama"</strong>: 6 conv. de 9 clics. Volumen bajo, calidad altísima — candidata prioritaria para escalar.</div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="ph"><h3 style="color:var(--red)">⚠ Gasto sin conversión</h3><span class="phr">costo vs. resultado</span></div>
+        <div class="pb0">
+          <table class="t">
+            <thead><tr><th>Keyword</th><th class="r">Costo</th><th class="r">Conv.</th><th>Nota</th></tr></thead>
+            <tbody>
+              <tr><td>second residency panama</td><td class="r">~US$19</td><td class="r rd">0</td><td><span class="tag s">EN/pausada</span></td></tr>
+              <tr><td>how to get residency</td><td class="r">~US$15</td><td class="r rd">0</td><td><span class="tag s">EN/pausada</span></td></tr>
+              <tr><td>abogados en panama</td><td class="r">~US$11</td><td class="r rd">0</td><td><span class="tag s">branding</span></td></tr>
+              <tr><td>asesoria legal empresarial</td><td class="r">~US$4</td><td class="r rd">0</td><td><span class="tag s">branding</span></td></tr>
+              <tr><td>migra panama</td><td class="r">~US$0.18</td><td class="r rd">0</td><td><span class="tag a">CTR 21.25% ⚡</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pb"><div class="co na">Keywords en inglés gastaron ~<strong>US$50 combinados con 0 conversiones</strong>. Problema: anuncio en inglés → sitio en español. Necesita landing localizada.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ GEOGRAFÍA -->
+  <section class="s" id="geo">
+    <div class="s-head">
+      <div class="s-title">Geografía</div>
+      <div class="s-sub">Colombia = mayor volumen · Panamá = mejor calidad y menor costo por conversión</div>
+    </div>
+    <div class="g2">
+      <div class="panel">
+        <div class="ph"><h3>Ads — conversión por país</h3><span class="phr">campaña LATAM activa</span></div>
+        <div class="pb0">
+          <table class="t">
+            <thead><tr><th>País</th><th class="r">Clics</th><th class="r">Conv.</th><th class="r">% Conv.</th><th class="r">$/conv.</th></tr></thead>
+            <tbody>
+              <tr class="hl"><td class="b">🇵🇦 Panamá</td><td class="r">307</td><td class="r hi">89</td><td class="r hi">28.99%</td><td class="r hi">US$1.49</td></tr>
+              <tr><td>🇨🇴 Colombia</td><td class="r">455</td><td class="r">34</td><td class="r">7.47%</td><td class="r">US$2.76</td></tr>
+              <tr><td>🇲🇽 México</td><td class="r">261</td><td class="r">7</td><td class="r">2.68%</td><td class="r">US$3.73</td></tr>
+              <tr><td>🇨🇷 Costa Rica</td><td class="r">~34</td><td class="r">4</td><td class="r gr">11.76%</td><td class="r">US$1.89</td></tr>
+              <tr><td>🇺🇸 EE.UU.</td><td class="r">~9</td><td class="r">1</td><td class="r">11.11%</td><td class="r">US$12.58</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pb"><div class="co go">Panamá convierte <strong>4× mejor</strong> que Colombia (28.99% vs. 7.47%) al costo más bajo. El mercado local es el de mayor calidad.</div></div>
+      </div>
+      <div class="panel">
+        <div class="ph"><h3>GA4 — usuarios por país (sitio completo)</h3><span class="phr">duración media de sesión</span></div>
+        <div class="pb">
+          <div class="bc">
+            <div class="br"><div class="bl">🇨🇴 Colombia</div><div class="bt"><div class="bf na" style="width:100%"></div></div><div class="bv">1,179 · 1m11s</div></div>
+            <div class="br"><div class="bl">🇪🇨 Ecuador</div><div class="bt"><div class="bf na" style="width:44%"></div></div><div class="bv">522 · 1m47s</div></div>
+            <div class="br"><div class="bl">🇵🇦 Panamá</div><div class="bt"><div class="bf go" style="width:25%"></div></div><div class="bv">293 · 1m33s</div></div>
+            <div class="br"><div class="bl">🇺🇸 Estados Unidos</div><div class="bt"><div class="bf st" style="width:19%"></div></div><div class="bv">219 · 59s</div></div>
+            <div class="br"><div class="bl">🇲🇽 México</div><div class="bt"><div class="bf st" style="width:16%"></div></div><div class="bv">184 · 1m53s</div></div>
+            <div class="br"><div class="bl">🇻🇪 Venezuela</div><div class="bt"><div class="bf te" style="width:4%"></div></div><div class="bv">42 · 2m03s</div></div>
+            <div class="br"><div class="bl">🇨🇱 Chile</div><div class="bt"><div class="bf te" style="width:2%"></div></div><div class="bv">21 · 3m59s ⭐</div></div>
+          </div>
+          <div class="co na" style="margin-top:9px">Chile, Cuba y Venezuela: pocos usuarios pero <strong>2–4 min de sesión media</strong> — consultas muy deliberadas de alto valor potencial.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑤ FUNNEL -->
+  <section class="s" id="funnel" style="background:var(--navy2)">
+    <div class="s-head">
+      <div class="s-title" style="color:var(--gold)">Funnel de marketing</div>
+      <div class="s-sub" style="color:rgba(255,255,255,.4)">Del anuncio en Google al lead generado · agosto 2026</div>
+    </div>
+    <div class="g21" style="align-items:start">
+      <!-- Funnel visual -->
+      <div class="funnel">
+        <div class="fs">
+          <div class="fb" style="background:var(--navy3);width:100%">
+            <div><div class="fn">👁 Ve el anuncio en Google</div><div class="fsub">Búsquedas de migración, residencia, visa en Panamá</div></div>
+            <div class="fv">28,021</div>
+          </div>
+          <div class="fcon"><div class="fpct" style="background:var(--navy2);color:rgba(255,255,255,.4)">↓ CTR 5.57%</div></div>
+        </div>
+        <div class="fs">
+          <div class="fb" style="background:#2D4070;width:91%">
+            <div><div class="fn">🖱 Clic en el anuncio</div><div class="fsub">Aterriza en /servicios-migratorios/ (99% del tráfico)</div></div>
+            <div class="fv">1,561</div>
+          </div>
+          <div class="fcon"><div class="fpct" style="background:var(--navy2);color:rgba(255,255,255,.4)">↓ 49.3% engaged</div></div>
+        </div>
+        <div class="fs">
+          <div class="fb" style="background:var(--steel);width:80%">
+            <div><div class="fn">📄 Navega el sitio</div><div class="fsub">GA4 · 3,508 sesiones totales · 1m 24s duración media</div></div>
+            <div class="fv">3,508</div>
+          </div>
+          <div class="fcon"><div class="fpct" style="background:var(--navy2);color:rgba(255,255,255,.4)">↓ intención de contacto</div></div>
+        </div>
+        <div class="fs">
+          <div class="fb" style="background:#4A5E78;width:67%">
+            <div><div class="fn">💬 Inicia contacto</div><div class="fsub">62 clics WhatsApp + 95 inicios de formulario</div></div>
+            <div class="fv">157</div>
+          </div>
+          <div class="fcon"></div>
+        </div>
+        <div class="fs">
+          <div class="fb" style="background:var(--gold);width:54%;clip-path:polygon(0 0,100% 0,97% 100%,3% 100%)">
+            <div><div class="fn dk">📝 Completa el formulario</div><div class="fsub dk">generate_lead confirmado por GA4</div></div>
+            <div class="fv dk">237</div>
+          </div>
+          <div class="fcon"></div>
+        </div>
+        <div class="fs">
+          <div class="fb" style="background:var(--gold2);width:40%;clip-path:polygon(3% 0,97% 0,93% 100%,7% 100%)">
+            <div><div class="fn dk">🎯 Lead generado</div><div class="fsub dk">Formularios confirmados + WhatsApp</div></div>
+            <div class="fv dk" style="font-size:22px">299</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Breakdown derecho -->
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <div class="mk3">
+          <div class="mk" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.08)">
+            <div class="mkv go">237</div>
+            <div class="mkl" style="color:rgba(255,255,255,.4)">Formularios<br>completados (GA4)</div>
+          </div>
+          <div class="mk" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.08)">
+            <div class="mkv go">62</div>
+            <div class="mkl" style="color:rgba(255,255,255,.4)">Clics a<br>WhatsApp</div>
+          </div>
+          <div class="mk" style="background:rgba(184,154,94,.15);border-color:rgba(184,154,94,.3)">
+            <div class="mkv go">116</div>
+            <div class="mkl" style="color:rgba(255,255,255,.4)">Forms via Ads<br>(clics pagados)</div>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,.04);border-radius:6px;padding:11px;border:1px solid rgba(255,255,255,.07)">
+          <div style="font-family:'Poppins',sans-serif;font-size:9.5px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:9px">WhatsApp por página</div>
+          <div class="bc">
+            <div class="br" style="grid-template-columns:120px 1fr 50px"><div class="bl" style="color:rgba(255,255,255,.65)">Abogados Migratorios</div><div class="bt" style="background:rgba(255,255,255,.08)"><div class="bf te" style="width:100%"></div></div><div class="bv" style="color:rgba(255,255,255,.4)">36 · 58%</div></div>
+            <div class="br" style="grid-template-columns:120px 1fr 50px"><div class="bl" style="color:rgba(255,255,255,.65)">Contacta Abogado</div><div class="bt" style="background:rgba(255,255,255,.08)"><div class="bf go" style="width:42%"></div></div><div class="bv" style="color:rgba(255,255,255,.4)">15</div></div>
+            <div class="br" style="grid-template-columns:120px 1fr 50px"><div class="bl" style="color:rgba(255,255,255,.65)">LP – SA/cuenta</div><div class="bt" style="background:rgba(255,255,255,.08)"><div class="bf st" style="width:19%"></div></div><div class="bv" style="color:rgba(255,255,255,.4)">7</div></div>
+            <div class="br" style="grid-template-columns:120px 1fr 50px"><div class="bl" style="color:rgba(255,255,255,.65)">Corporativo / EN</div><div class="bt" style="background:rgba(255,255,255,.08)"><div class="bf st" style="width:8%"></div></div><div class="bv" style="color:rgba(255,255,255,.4)">3+3</div></div>
+          </div>
+        </div>
+
+        <div class="co go" style="border-color:rgba(184,154,94,.5)">📋 El <strong>formulario domina</strong>: 237 envíos vs. 62 WA. Asegurar seguimiento CRM en cada envío.</div>
+        <div class="co te" style="border-color:rgba(27,133,110,.4)">💬 <strong>Abogados Migratorios</strong> = 58% de los clics a WhatsApp y el 100% del formulario de migración (97 envíos).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑥ LEADS -->
+  <section class="s" id="leads">
+    <div class="s-head">
+      <div class="s-title">Leads y acciones de conversión</div>
+      <div class="s-sub">Google Ads configurado + eventos GA4</div>
+    </div>
+    <div class="g2">
+      <div class="panel">
+        <div class="ph"><h3>Acciones — Google Ads</h3><span class="phr">atribuidas a clics pagados</span></div>
+        <div class="pb0">
+          <table class="t">
+            <thead><tr><th>Acción</th><th>Estado</th><th class="r">Conv.</th></tr></thead>
+            <tbody>
+              <tr class="hl"><td class="b">Formulario_migracion</td><td><span class="tag g">Activo</span></td><td class="r hi">64</td></tr>
+              <tr class="hl"><td class="b">Formulario enviado — Contáctenos</td><td><span class="tag g">Activo</span></td><td class="r hi">52</td></tr>
+              <tr><td>Conversación iniciada (WhatsApp)</td><td><span class="tag g">Activo</span></td><td class="r">18</td></tr>
+              <tr><td>Registro (carga de página)</td><td><span class="tag a">Esperando</span></td><td class="r">1–2</td></tr>
+              <tr><td class="rd">generation_lead</td><td><span class="tag r">Config. incorrecta ⚠</span></td><td class="r rd">0–2</td></tr>
+              <tr><td style="color:var(--txt3)">TLAG Form_home</td><td><span class="tag s">Sin datos</span></td><td class="r">0</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pb"><div class="co rd"><strong>generation_lead marcada como "Configuración incorrecta"</strong> en Google Ads. Sus datos no son confiables hasta corregirla.</div></div>
+      </div>
+      <div class="panel">
+        <div class="ph"><h3>Eventos clave GA4</h3><span class="phr">sitio completo · agosto</span></div>
+        <div class="pb">
+          <div class="bc">
+            <div class="br"><div class="bl">generate_lead</div><div class="bt"><div class="bf go" style="width:100%"></div></div><div class="bv">237</div></div>
+            <div class="br"><div class="bl">Conoce_al_equipo</div><div class="bt"><div class="bf st" style="width:95%"></div></div><div class="bv">225</div></div>
+            <div class="br"><div class="bl">solicitar_orientacion</div><div class="bt"><div class="bf st" style="width:88%"></div></div><div class="bv">209</div></div>
+            <div class="br"><div class="bl">clic_preasesoria</div><div class="bt"><div class="bf na" style="width:64%"></div></div><div class="bv">151</div></div>
+            <div class="br"><div class="bl">Formulario_migracion</div><div class="bt"><div class="bf te" style="width:41%"></div></div><div class="bv">97</div></div>
+            <div class="br"><div class="bl">form_start</div><div class="bt"><div class="bf te" style="width:40%"></div></div><div class="bv">95</div></div>
+            <div class="br"><div class="bl">Clic WhatsApp (total)</div><div class="bt"><div class="bf te" style="width:26%"></div></div><div class="bv">62</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑦ GA4 ANALYTICS -->
+  <section class="s" id="ga4">
+    <div class="s-head">
+      <div class="s-title">Sitio web — Google Analytics 4</div>
+      <div class="s-sub">Total propiedad · 1–30 agosto 2026</div>
+    </div>
+    <div class="kpi-strip" style="grid-template-columns:repeat(6,1fr);margin-bottom:12px">
+      <div class="kpi dk"><div class="v">3,085</div><div class="l">Usuarios activos</div></div>
+      <div class="kpi dk"><div class="v">3,508</div><div class="l">Sesiones</div><div class="ss">3.39 págs/sesión</div></div>
+      <div class="kpi dk"><div class="v">1m 24s</div><div class="l">Duración media</div></div>
+      <div class="kpi dk"><div class="v">49.3%</div><div class="l">Tasa interacción</div></div>
+      <div class="kpi ac"><div class="v">237</div><div class="l">Formularios</div><div class="ss">generate_lead</div></div>
+      <div class="kpi ac"><div class="v">62</div><div class="l">Clics WhatsApp</div><div class="ss">2.0% de sesiones</div></div>
+    </div>
+
+    <div class="g2">
+      <div class="panel">
+        <div class="ph"><h3>Dispositivos — campaña activa</h3></div>
+        <div class="pb">
+          <div class="devs">
+            <div class="dev" style="border-top:2px solid var(--navy)">
+              <div style="font-size:22px">📱</div>
+              <div class="dv">98%</div>
+              <div style="font-family:'Poppins',sans-serif;font-size:11.5px;font-weight:700;color:var(--navy);margin-top:2px">Móvil</div>
+              <div class="dl">1,166 clics · 125 conv.<br>Conv. rate: 10.72%</div>
+            </div>
+            <div class="dev" style="border-top:2px solid var(--gold)">
+              <div style="font-size:22px">💻</div>
+              <div class="dv" style="color:var(--gold)">40%</div>
+              <div style="font-family:'Poppins',sans-serif;font-size:11.5px;font-weight:700;color:var(--navy);margin-top:2px">Escritorio</div>
+              <div class="dl">~20 clics · 8 conv.<br>Conv. rate: <strong>40.00% 🔥</strong></div>
+            </div>
+            <div class="dev" style="border-top:2px solid var(--steel)">
+              <div style="font-size:22px">📟</div>
+              <div class="dv" style="color:var(--steel)">66%</div>
+              <div style="font-family:'Poppins',sans-serif;font-size:11.5px;font-weight:700;color:var(--navy);margin-top:2px">Tablet</div>
+              <div class="dl">~3 clics · 2 conv.<br>Bajo volumen</div>
+            </div>
+          </div>
+          <div class="co na" style="margin-top:9px">Escritorio convierte <strong>4× mejor</strong> que móvil (40% vs. 10.72%). Priorizar UX mobile-first para cerrar ese gap.</div>
+        </div>
+      </div>
+
+      <div id="canales">
+        <div class="panel">
+          <div class="ph"><h3>Canales — calidad vs. volumen</h3><span class="phr">tasa interacción = calidad del clic</span></div>
+          <div class="pb0">
+            <table class="t">
+              <thead><tr><th>Canal / fuente</th><th class="r">Sesiones</th><th class="r">%</th><th class="r">% Interacción</th></tr></thead>
+              <tbody>
+                <tr><td>Meta (fb/paid)</td><td class="r">1,584</td><td class="r">45.2%</td><td class="r">45.4%</td></tr>
+                <tr class="hl"><td class="b">Google Ads (google/cpc)</td><td class="r">1,089</td><td class="r">31.0%</td><td class="r hi">55.7%</td></tr>
+                <tr><td>Instagram (ig/paid)</td><td class="r">351</td><td class="r">10.0%</td><td class="r">40.7%</td></tr>
+                <tr><td>Directo</td><td class="r">134</td><td class="r">3.8%</td><td class="r">34.3%</td></tr>
+                <tr><td>Google Orgánico</td><td class="r">87</td><td class="r">2.5%</td><td class="r gr">75.9% ⭐</td></tr>
+                <tr><td class="rd">(not set) — posible bot</td><td class="r rd">76</td><td class="r">2.2%</td><td class="r rd">0.0%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pb"><div class="co go">Google Ads entrega <strong>55.7% de tasa de interacción</strong> vs. 45.4% de Meta. Con el 31% del volumen, aporta la conversión más eficiente del mix.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑧ PÁGINAS -->
+  <section class="s" id="paginas">
+    <div class="s-head">
+      <div class="s-title">Páginas más visitadas</div>
+      <div class="s-sub">3 landings concentran ~60% del tráfico y revelan la intención de consulta</div>
+    </div>
+    <div class="panel">
+      <div class="pb0">
+        <table class="t">
+          <thead><tr><th>Página / landing</th><th class="r">Usuarios</th><th class="r">Vistas</th><th>Motivo de visita</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td class="b">LP – SA, fundación, cuenta bancaria</td><td class="r">1,157</td><td class="r hi">1,527</td><td><span class="tag g">Constitución empresa</span></td></tr>
+            <tr><td>Inicio — Asesoría legal</td><td class="r">828</td><td class="r">1,154</td><td><span class="tag s">Home general</span></td></tr>
+            <tr><td>LP – Jubilados y pensionados</td><td class="r">519</td><td class="r">694</td><td><span class="tag g">Visa jubilado</span></td></tr>
+            <tr class="hl"><td class="b">Abogados Migratorios | Visas y Residencias</td><td class="r">355</td><td class="r hi">483</td><td><span class="tag g">Migración / residencia</span></td></tr>
+            <tr><td>LP – USA (ES)</td><td class="r">253</td><td class="r">312</td><td><span class="tag a">Mercado angloparlante</span></td></tr>
+            <tr><td>Gracias (confirmación formulario)</td><td class="r">216</td><td class="r">236</td><td><span class="tag g">Conversión confirmada</span></td></tr>
+            <tr><td>Contacta a un Abogado</td><td class="r">97</td><td class="r">123</td><td><span class="tag s">Contacto directo</span></td></tr>
+            <tr><td class="rd">Página no encontrada (404) ⚠</td><td class="r rd">15</td><td class="r rd">26</td><td><span class="tag r">Enlace roto</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑩ LEADS REALES -->
+  <section class="s" id="leads-data">
+    <div class="s-head">
+      <div class="s-title">Leads reales — Campañas agosto 2026</div>
+      <div class="s-sub">58 formularios recibidos (jul–ago 2026) · análisis manual de cada mensaje</div>
+    </div>
+
+    <!-- Resumen: dos formularios -->
+    <div class="g2" style="margin-bottom:12px">
+
+      <!-- Formulario Migración (campaña pagada) -->
+      <div class="panel">
+        <div class="ph" style="background:var(--navy)">
+          <h3 style="color:var(--gold)">📋 Formulario Migración — tráfico pagado</h3>
+          <span class="phr" style="color:rgba(255,255,255,.4)">43 leads · con gclid (Google Ads)</span>
+        </div>
+        <div class="pb">
+          <div class="bc" style="margin-bottom:12px">
+            <div class="br"><div class="bl">Consulta genérica</div><div class="bt"><div class="bf st" style="width:100%"></div></div><div class="bv">10 · 23.3%</div></div>
+            <div class="br"><div class="bl">Residencia / relocation</div><div class="bt"><div class="bf te" style="width:80%"></div></div><div class="bv">8 · 18.6%</div></div>
+            <div class="br"><div class="bl">Visa de turismo</div><div class="bt"><div class="bf go" style="width:60%"></div></div><div class="bv">6 · 14.0%</div></div>
+            <div class="br"><div class="bl">Fuera de alcance</div><div class="bt"><div class="bf" style="width:60%;background:var(--red)"></div></div><div class="bv">6 · 14.0%</div></div>
+            <div class="br"><div class="bl">Trámite PPT</div><div class="bt"><div class="bf na" style="width:50%"></div></div><div class="bv">5 · 11.6%</div></div>
+            <div class="br"><div class="bl">Spam / baja calidad</div><div class="bt"><div class="bf" style="width:40%;background:var(--red)"></div></div><div class="bv">4 · 9.3%</div></div>
+            <div class="br"><div class="bl">Casos complejos</div><div class="bt"><div class="bf na" style="width:20%"></div></div><div class="bv">2 · 4.7%</div></div>
+            <div class="br"><div class="bl">Visa de tránsito</div><div class="bt"><div class="bf na" style="width:20%"></div></div><div class="bv">2 · 4.7%</div></div>
+          </div>
+          <!-- KPIs rápidos -->
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px">
+            <div class="mk"><div class="mkv go">18</div><div class="mkl">Leads calificados<br>(residencia + consulta)</div></div>
+            <div class="mk"><div class="mkv" style="color:var(--teal)">41.9%</div><div class="mkl">Tasa de calidad<br>sobre 43 leads</div></div>
+            <div class="mk"><div class="mkv" style="color:var(--red)">10</div><div class="mkl">Descartables<br>(spam + fuera alcance)</div></div>
+          </div>
+          <div class="co go">🎯 <strong>Residencia y relocation</strong> son los leads de mayor valor: ciudadanos extranjeros listos para contratar asesoría legal completa. Representan el 18.6% del total.</div>
+        </div>
+      </div>
+
+      <!-- Formulario General (orgánico) -->
+      <div class="panel">
+        <div class="ph" style="background:var(--steel)">
+          <h3 style="color:#fff">📋 Formulario Contáctenos — tráfico orgánico</h3>
+          <span class="phr" style="color:rgba(255,255,255,.45)">15 leads · sin gclid (no atribuibles a Ads)</span>
+        </div>
+        <div class="pb">
+          <div class="bc" style="margin-bottom:12px">
+            <div class="br"><div class="bl">Ambiguo / sin info</div><div class="bt"><div class="bf st" style="width:100%"></div></div><div class="bv">4 · 26.7%</div></div>
+            <div class="br"><div class="bl">Migración mal-enrutada</div><div class="bt"><div class="bf te" style="width:100%"></div></div><div class="bv">4 · 26.7%</div></div>
+            <div class="br"><div class="bl">Spam</div><div class="bt"><div class="bf" style="width:75%;background:var(--red)"></div></div><div class="bv">3 · 20.0%</div></div>
+            <div class="br"><div class="bl">Derecho de familia</div><div class="bt"><div class="bf go" style="width:50%"></div></div><div class="bv">2 · 13.3%</div></div>
+            <div class="br"><div class="bl">Derecho penal</div><div class="bt"><div class="bf na" style="width:25%"></div></div><div class="bv">1 · 6.7%</div></div>
+            <div class="br"><div class="bl">Derecho corporativo</div><div class="bt"><div class="bf na" style="width:25%"></div></div><div class="bv">1 · 6.7%</div></div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px">
+            <div class="mk"><div class="mkv go">7</div><div class="mkl">Leads con potencial<br>(familia + corp. + migr.)</div></div>
+            <div class="mk"><div class="mkv" style="color:var(--teal)">46.7%</div><div class="mkl">Tasa de calidad<br>sobre 15 leads</div></div>
+            <div class="mk"><div class="mkv" style="color:var(--red)">3</div><div class="mkl">Spam<br>(mismo email: Pablo)</div></div>
+          </div>
+          <div class="co na">⚠ 4 leads de <strong>migración mal-enrutada</strong> llegaron al formulario general (no al de migración). Revisar el flujo de navegación desde la home — hay oportunidad de capturar más leads calificados.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Detalle de leads de campañas -->
+    <div class="panel" style="margin-bottom:10px">
+      <div class="ph" style="background:var(--navy)">
+        <h3 style="color:var(--gold)">Leads de Campaña Google Ads — detalle completo (43 formularios con gclid)</h3>
+        <span class="phr" style="color:rgba(255,255,255,.4)">6 agosto – 30 agosto 2026</span>
+      </div>
+      <div class="pb0">
+        <table class="t" style="font-size:11px">
+          <thead>
+            <tr>
+              <th>#</th><th>Nombre</th><th>Fecha</th>
+              <th>Extracto del mensaje</th><th>Categoría</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- RESIDENCIA / RELOCATION -->
+            <tr class="hl"><td>1</td><td class="b">Jonatan Gur</td><td>03/08</td><td>Friendly Nations Visa y cómo trasladar empresa canadiense a Panamá</td><td><span class="tag g">Residencia</span></td></tr>
+            <tr class="hl"><td>2</td><td class="b">Wendy Adkins</td><td>04/08</td><td>Retirement Visa — proceso y costo</td><td><span class="tag g">Residencia</span></td></tr>
+            <tr class="hl"><td>3</td><td class="b">Mayquel Elizarde</td><td>16/08</td><td>Emigrar a Panamá desde Brasil con familia (cubano)</td><td><span class="tag g">Residencia</span></td></tr>
+            <tr class="hl"><td>4</td><td class="b">Henry Cabrera Ventura</td><td>23/08</td><td>Vivir con familia en Panamá</td><td><span class="tag g">Residencia</span></td></tr>
+            <tr class="hl"><td>5</td><td class="b">Massimo Rossi</td><td>24/08</td><td>Cocinero italiano en yates — residencia en Panamá</td><td><span class="tag g">Residencia</span></td></tr>
+            <tr class="hl"><td>6</td><td class="b">John Jairo Cárdenas</td><td>26/08</td><td>Pensionado colombiano interesado en residencia</td><td><span class="tag g">Residencia</span></td></tr>
+            <tr class="hl"><td>7</td><td class="b">Darinka Portocarrero</td><td>30/08</td><td>Trabajo remoto — orientación migratoria</td><td><span class="tag g">Residencia</span></td></tr>
+            <tr class="hl"><td>8</td><td class="b">Frederick</td><td>30/08</td><td>Técnico venezolano quiere mudarse a Panamá</td><td><span class="tag g">Residencia</span></td></tr>
+            <!-- CONSULTA GENÉRICA -->
+            <tr><td>9</td><td>Rosa López Maruri</td><td>04/08</td><td>Requiero orientación migratoria</td><td><span class="tag a">Consulta</span></td></tr>
+            <tr><td>10</td><td>Jorge Conde</td><td>06/08</td><td>Quisiera información</td><td><span class="tag a">Consulta</span></td></tr>
+            <tr><td>11</td><td>Paulina Porres</td><td>08/08</td><td>Agendar consulta legal sin costo</td><td><span class="tag a">Consulta</span></td></tr>
+            <tr><td>12</td><td>Lilian Cueva</td><td>16/08</td><td>Más detalles sobre información migratoria</td><td><span class="tag a">Consulta</span></td></tr>
+            <tr><td>13</td><td>Rheymer Lucena</td><td>17/08</td><td>Cuáles son los trámites para una visa</td><td><span class="tag a">Consulta</span></td></tr>
+            <tr><td>14</td><td>Freddy Núñez Ovalles</td><td>19/08</td><td>Pasos para solicitar visa de Panamá</td><td><span class="tag a">Consulta</span></td></tr>
+            <tr><td>15</td><td>Thalia Cardero</td><td>20/08</td><td>Cómo obtener mi visa a Panamá</td><td><span class="tag a">Consulta</span></td></tr>
+            <tr><td>16</td><td>Lucia Michelle</td><td>24/08</td><td>Cómo aplicar para la visa de Panamá (cubana)</td><td><span class="tag a">Consulta</span></td></tr>
+            <tr><td>17</td><td>Yosney Tejeda</td><td>27/08</td><td>Obtener visa a Panamá siendo cubano</td><td><span class="tag a">Consulta</span></td></tr>
+            <tr><td>18</td><td>Milagros</td><td>29/08</td><td>Realizar una consulta</td><td><span class="tag a">Consulta</span></td></tr>
+            <!-- VISA TURISMO -->
+            <tr><td>19</td><td>Alismelys Pérez</td><td>17/08</td><td>Visa de turismo para cubanos — tarifas</td><td><span class="tag s">Turismo</span></td></tr>
+            <tr><td>20</td><td>Katerin Mesa Justiz</td><td>17/08</td><td>Quiero ir de visita a Panamá</td><td><span class="tag s">Turismo</span></td></tr>
+            <tr><td>21</td><td>Jorge Charbel Kiork</td><td>19/08</td><td>Quisiera ir de paseo</td><td><span class="tag s">Turismo</span></td></tr>
+            <tr><td>22</td><td>Mailin Rodriguez</td><td>21/08</td><td>Visa Autorizada de Turismo para cubano — cotización</td><td><span class="tag s">Turismo</span></td></tr>
+            <tr><td>23</td><td>Lianne Arzola Gamboa</td><td>26/08</td><td>Visa Panamá siendo cubana con residencia en Surinam</td><td><span class="tag s">Turismo</span></td></tr>
+            <tr><td>24</td><td>Yudiany Arias Llaca</td><td>28/08</td><td>Visitar Panamá con fin turístico (vacaciones)</td><td><span class="tag s">Turismo</span></td></tr>
+            <!-- PPT -->
+            <tr><td>25</td><td>Edixon Perez</td><td>11/08</td><td>PPT por primera vez, mayor de edad</td><td><span class="tag s">PPT</span></td></tr>
+            <tr><td>26</td><td>Jhon Miranda</td><td>24/08</td><td>Quiero sacar el PPT</td><td><span class="tag s">PPT</span></td></tr>
+            <tr><td>27</td><td>Emyerbe José</td><td>24/08</td><td>Acceso al PPT por primera vez</td><td><span class="tag s">PPT</span></td></tr>
+            <tr><td>28</td><td>Maryuris Paola</td><td>25/08</td><td>Quiero sacarme el PPT</td><td><span class="tag s">PPT</span></td></tr>
+            <tr><td>29</td><td>Darwin</td><td>27/08</td><td>PPT</td><td><span class="tag s">PPT</span></td></tr>
+            <!-- TRÁNSITO -->
+            <tr><td>30</td><td>Liubar Jay Piedra</td><td>19/08</td><td>Visa de tránsito urgente — vuelo Copa con escala en PTY</td><td><span class="tag s">Tránsito</span></td></tr>
+            <tr><td>31</td><td>Senat Guyana</td><td>19/08</td><td>Haitiano varado en Cuba — visa tránsito hacia China</td><td><span class="tag s">Tránsito</span></td></tr>
+            <!-- CASOS COMPLEJOS -->
+            <tr><td>32</td><td>Isaac Leonardo</td><td>21/08</td><td>Cómo solicitar asilo en Panamá</td><td><span class="tag na" style="background:rgba(30,43,69,.08);color:var(--navy)">Complejo</span></td></tr>
+            <tr><td>33</td><td>Miriam Aguirre</td><td>22/08</td><td>No tiene sello de entrada al país — qué hacer</td><td><span class="tag na" style="background:rgba(30,43,69,.08);color:var(--navy)">Complejo</span></td></tr>
+            <!-- FUERA DE ALCANCE -->
+            <tr><td>34</td><td style="color:var(--txt3)">Jhovoy McKenzie</td><td>06/08</td><td style="color:var(--txt3)">Documento de soltero Jamaica (online)</td><td><span class="tag r">Fuera alcance</span></td></tr>
+            <tr><td>35</td><td style="color:var(--txt3)">Wendy Aviles Rivera</td><td>10/08</td><td style="color:var(--txt3)">Esposo retenido en frontera de EE.UU.</td><td><span class="tag r">Fuera alcance</span></td></tr>
+            <tr><td>36</td><td style="color:var(--txt3)">Dairinayona Rendon</td><td>20/08</td><td style="color:var(--txt3)">Llevar hijo a EE.UU. desde México</td><td><span class="tag r">Fuera alcance</span></td></tr>
+            <tr><td>37</td><td style="color:var(--txt3)">Yorbelis Briceño</td><td>21/08</td><td style="color:var(--txt3)">Obtener nacionalidad colombiana (madre fallecida)</td><td><span class="tag r">Fuera alcance</span></td></tr>
+            <tr><td>38</td><td style="color:var(--txt3)">Claudette Gómez</td><td>23/08</td><td style="color:var(--txt3)">Madre soltera busca rehacer su vida — emprender</td><td><span class="tag r">Fuera alcance</span></td></tr>
+            <tr><td>39</td><td style="color:var(--txt3)">Daniel Miranda</td><td>24/08</td><td style="color:var(--txt3)">Supuesta denuncia (mensaje confuso)</td><td><span class="tag r">Fuera alcance</span></td></tr>
+            <!-- SPAM -->
+            <tr><td>40</td><td style="color:var(--txt3)">Angelica (interna)</td><td>16/07</td><td style="color:var(--txt3)">Hola (email thelegalgrouppanama)</td><td><span class="tag r">Spam</span></td></tr>
+            <tr><td>41</td><td style="color:var(--txt3)">Pablo</td><td>06/08</td><td style="color:var(--txt3)">Lorem ipsum</td><td><span class="tag r">Spam</span></td></tr>
+            <tr><td>42</td><td style="color:var(--txt3)">Wendy Aviles (dup.)</td><td>10/08</td><td style="color:var(--txt3)">"Pa" — mensaje vacío</td><td><span class="tag r">Spam</span></td></tr>
+            <tr><td>43</td><td style="color:var(--txt3)">Jasbleidy Gutiérrez</td><td>18/08</td><td style="color:var(--txt3)">Texto genérico motivacional sin intención legal</td><td><span class="tag r">Spam</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Nota metodológica + lead quality summary -->
+    <div class="g2">
+      <div class="co na">
+        📌 <strong>Nota metodológica:</strong> Solo el Formulario Migración tiene parámetros gclid/gad_campaignid — es el único 100% atribuible a Google Ads. El Formulario General (15 leads) corresponde a tráfico orgánico/directo. Los conteos son manuales sobre el contenido de cada correo; no reflejan tasa de conversión a cliente.
+      </div>
+      <div class="co go">
+        💡 <strong>Hallazgo clave:</strong> De los 43 leads pagados, 18 son calificados (41.9%). El perfil dominante es el <strong>extranjero latinoamericano buscando residencia o relocation en Panamá</strong> — exactamente el avatar que justifica la campaña. El segmento cubano es el de mayor volumen individual (visa turismo + consultas).
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑨ RECOMENDACIONES -->
+
+  <section class="s" id="recs">
+    <div class="s-head">
+      <div class="s-title">Recomendaciones para septiembre</div>
+      <div class="s-sub">Ordenadas por impacto esperado</div>
+    </div>
+    <div class="g2">
+      <div class="panel">
+        <div class="ph" style="background:var(--navy)"><h3 style="color:var(--gold)">Acciones inmediatas</h3></div>
+        <div class="pb">
+          <div class="rec"><div class="rn">1</div><div><div class="rt">Aumentar presupuesto campaña LATAM</div><div class="rd">De US$9.90 a US$14–18/día. Google la marca como limitada por volumen. Proyección: +40–60% en leads al mismo CPC de US$0.22.</div></div></div>
+          <div class="rec"><div class="rn">2</div><div><div class="rt">Corregir "generation_lead" en Google Ads</div><div class="rd">Marcada como "Configuración incorrecta". Sus datos no son confiables. También verificar Form_home y clic_descubre_servicios.</div></div></div>
+          <div class="rec"><div class="rn">3</div><div><div class="rt">Investigar el 404 que afecta a 15 usuarios</div><div class="rd">Probable enlace roto en un anuncio activo. Cada clic a un 404 es presupuesto desperdiciado.</div></div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="ph" style="background:var(--navy)"><h3 style="color:var(--gold)">Optimización y crecimiento</h3></div>
+        <div class="pb">
+          <div class="rec"><div class="rn">4</div><div><div class="rt">Escalar "abogados de migracion en panama"</div><div class="rd">66.67% de conversión con solo ~9 clics. Crear variaciones de alta intención y asignar presupuesto específico.</div></div></div>
+          <div class="rec"><div class="rn">5</div><div><div class="rt">Landing en inglés antes de reactivar USA/CAN</div><div class="rd">Anuncio en inglés → sitio en español = US$58.31 gastados, 0 conversiones. La demanda existe (79 clics a US$1.33 CPC).</div></div></div>
+          <div class="rec"><div class="rn">6</div><div><div class="rt">Vincular GA4 a la cuenta de Google Ads</div><div class="rd">Hoy dice "Medición: Ninguno". Vincularla permite reportar tiempo en sitio y comportamiento post-clic por keyword.</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cierre -->
+    <div style="margin-top:12px;background:var(--navy);border-radius:8px;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px">
+      <div>
+        <div style="font-family:'Poppins',sans-serif;font-size:15px;font-weight:900;color:var(--white);margin-bottom:4px">Agosto fue eficiente.</div>
+        <div style="font-size:11.5px;color:rgba(255,255,255,.5);max-width:560px;line-height:1.55">136 conversiones a US$2.64 cada una con una sola campaña activa. Con los ajustes de configuración pendientes y un pequeño aumento de presupuesto, septiembre puede duplicar los leads sin cambiar la estrategia central.</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div style="font-family:'Poppins',sans-serif;font-size:30px;font-weight:900;color:var(--gold)">US$1.96</div>
+        <div style="font-size:9.5px;color:rgba(255,255,255,.38);line-height:1.4">costo por conversión<br>campaña principal</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <span>The Legal Agency Group Panamá · Google Ads 523-163-4262 · GA4 · Agosto 2026</span>
+    <span>Preparado por Al Dente Marketing Studio</span>
+  </div>
+</main>
+
+<script>
+const sections = document.querySelectorAll('section[id]');
+const navItems = document.querySelectorAll('.nav-item[href]');
+const main = document.querySelector('.main');
+
+main.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => {
+    if (main.scrollTop + 70 >= s.offsetTop) cur = s.id;
+  });
+  navItems.forEach(n => {
+    const id = n.getAttribute('href').slice(1);
+    n.classList.toggle('active', id === cur || (id === 'ga4' && cur === 'canales'));
+  });
+});
+
+navItems.forEach(item => {
+  item.addEventListener('click', e => {
+    e.preventDefault();
+    const id = item.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) main.scrollTo({ top: el.offsetTop - 4, behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
