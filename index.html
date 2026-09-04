@@ -3,272 +3,237 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard · Agosto 2026 · TLAGP</title>
+<title>TLAGP | Performance Dashboard · Agosto 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-/* ─── TOKENS ──────────────────────────────────── */
 :root {
-  --navy:    #1E2B45;
-  --navy2:   #141D30;
-  --navy3:   #263354;
-  --gold:    #B89A5E;
-  --gold2:   #D4B87A;
-  --steel:   #5F6E84;
-  --steel2:  #8397B2;
-  --snow:    #F4F3F0;
-  --white:   #FFFFFF;
-  --border:  rgba(30,43,69,.10);
-  --teal:    #1B856E;
-  --teal-bg: #E2F3EE;
-  --red:     #A83030;
-  --red-bg:  #FAECEC;
-  --txt:     #1E2B45;
-  --txt2:    #5F6E84;
-  --txt3:    #8397B2;
+  --navy:   #1E2B45;
+  --navy2:  #141D30;
+  --navy3:  #263354;
+  --gold:   #B89A5E;
+  --gold2:  #D4B87A;
+  --steel:  #5F6E84;
+  --snow:   #F4F3F0;
+  --white:  #FFFFFF;
+  --border: rgba(30,43,69,.10);
+  --teal:   #1B856E;
+  --tealb:  #E2F3EE;
+  --red:    #A83030;
+  --redb:   #FAECEC;
+  --txt:    #1E2B45;
+  --txt2:   #5F6E84;
+  --txt3:   #8397B2;
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Roboto',sans-serif;font-weight:400;color:var(--txt);background:var(--snow);font-size:13px;line-height:1.6}
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { height: 100%; }
-body {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  color: var(--txt);
-  background: var(--snow);
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 230px 1fr;
-  grid-template-rows: 56px 1fr;
-  font-size: 13px;
+/* ── TOPBAR ───────────────────────────── */
+.topbar{
+  background:var(--navy2);
+  padding:0 40px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:64px;
+  border-bottom:1px solid rgba(184,154,94,.2);
+  position:sticky;top:0;z-index:100;
 }
-
-/* ─── TOPBAR ──────────────────────────────────── */
-.topbar {
-  grid-column: 1 / -1;
-  background: var(--navy2);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 24px 0 0;
-  border-bottom: 1px solid rgba(184,154,94,.25);
-  position: sticky; top: 0; z-index: 100;
+.topbar-logo img{height:36px;width:auto;display:block}
+.topbar-right{display:flex;align-items:center;gap:14px}
+.period-badge{
+  background:rgba(184,154,94,.15);border:1px solid rgba(184,154,94,.3);
+  border-radius:4px;padding:4px 12px;
+  font-size:11px;color:var(--gold);font-weight:500;
 }
-.tb-brand {
-  display: flex; align-items: center;
-  width: 230px; padding: 0 18px;
-  height: 56px;
-  border-right: 1px solid rgba(255,255,255,.06);
-  gap: 10px;
+.prep-by{font-size:10px;color:rgba(255,255,255,.3)}
+
+/* ── LAYOUT ───────────────────────────── */
+.main{max-width:1240px;margin:0 auto;padding:32px 32px 60px}
+
+/* ── SECTION ──────────────────────────── */
+.section{margin-bottom:40px}
+.section-label{
+  display:flex;align-items:center;gap:10px;margin-bottom:16px;
 }
-.tb-logo-svg { width: 34px; height: 34px; flex-shrink: 0; }
-.tb-name {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 900; font-size: 10px;
-  color: #fff; line-height: 1.3;
-  letter-spacing: .02em;
+.section-num{
+  font-family:'Poppins',sans-serif;font-size:10px;font-weight:900;
+  color:var(--white);background:var(--gold);
+  width:22px;height:22px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
 }
-.tb-name span { display: block; color: var(--gold); font-size: 8.5px; font-weight: 400; letter-spacing: .04em; }
-.tb-center {
-  font-family: 'Poppins', sans-serif;
-  font-size: 12px; font-weight: 700;
-  color: var(--gold); letter-spacing: .12em; text-transform: uppercase;
+.section-title{
+  font-family:'Poppins',sans-serif;font-size:16px;font-weight:900;
+  color:var(--navy);
 }
-.tb-right { display: flex; align-items: center; gap: 14px; }
-.period {
-  background: rgba(184,154,94,.15);
-  border: 1px solid rgba(184,154,94,.3);
-  border-radius: 4px; padding: 3px 10px;
-  font-size: 11px; color: var(--gold); font-weight: 500;
+.section-sub{font-size:12px;color:var(--txt3);margin-top:1px}
+
+/* ── HERO BAND ────────────────────────── */
+.hero{
+  background:linear-gradient(130deg,var(--navy2) 0%,var(--navy3) 100%);
+  border-radius:12px;padding:36px 40px;margin-bottom:40px;
+  position:relative;overflow:hidden;
 }
-.prep { font-size: 10px; color: rgba(255,255,255,.3); }
-
-/* ─── SIDEBAR ─────────────────────────────────── */
-.sidebar {
-  background: var(--navy);
-  position: sticky; top: 56px;
-  height: calc(100vh - 56px);
-  overflow-y: auto;
-  display: flex; flex-direction: column;
-  border-right: 1px solid rgba(255,255,255,.04);
+.hero::after{
+  content:'';position:absolute;right:-60px;top:-60px;
+  width:280px;height:280px;border-radius:50%;
+  background:rgba(184,154,94,.07);pointer-events:none;
 }
-.nav-group { padding: 18px 10px 6px; }
-.nav-group-label {
-  font-size: 9px; font-weight: 700;
-  letter-spacing: .14em; text-transform: uppercase;
-  color: rgba(255,255,255,.28); padding: 0 6px; margin-bottom: 4px;
+.hero-title{
+  font-family:'Poppins',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:6px;
 }
-.nav-item {
-  display: flex; align-items: center; gap: 8px;
-  padding: 7px 10px; margin: 1px 0;
-  border-radius: 5px;
-  font-size: 12px; color: rgba(255,255,255,.6);
-  cursor: pointer; text-decoration: none;
-  transition: background .12s, color .12s;
+.hero-sub{font-size:13px;color:rgba(255,255,255,.55);margin-bottom:28px;max-width:620px;line-height:1.55}
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,.06);border-radius:8px;overflow:hidden}
+.kpi{background:rgba(255,255,255,.04);padding:16px 18px}
+.kpi .v{
+  font-family:'Poppins',sans-serif;
+  font-size:clamp(20px,2.5vw,32px);font-weight:900;
+  color:var(--gold);line-height:1;margin-bottom:4px;
 }
-.nav-item:hover { background: rgba(255,255,255,.06); color: #fff; }
-.nav-item.active { background: rgba(184,154,94,.18); color: var(--gold); }
-.nav-dot {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: rgba(255,255,255,.18); flex-shrink: 0;
+.kpi .l{font-size:10px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.06em;line-height:1.3}
+.kpi.hi{background:rgba(184,154,94,.15)}
+.kpi.hi .v{color:var(--gold2)}
+
+/* ── NOTE BOX ─────────────────────────── */
+.note{
+  background:rgba(255,255,255,.05);border-left:2px solid rgba(184,154,94,.4);
+  border-radius:0 6px 6px 0;padding:10px 14px;margin-top:16px;
+  font-size:11.5px;color:rgba(255,255,255,.5);line-height:1.55;
 }
-.nav-item.active .nav-dot { background: var(--gold); }
+.note strong{color:rgba(255,255,255,.75)}
 
-/* ─── MAIN ────────────────────────────────────── */
-.main { overflow-y: auto; display: flex; flex-direction: column; }
-section[id] { scroll-margin-top: 0; }
+/* ── GRID LAYOUTS ─────────────────────── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.g32{display:grid;grid-template-columns:3fr 2fr;gap:16px}
+.g23{display:grid;grid-template-columns:2fr 3fr;gap:16px}
 
-/* ─── SECTION WRAPPER ─────────────────────────── */
-.s { padding: 20px 22px; border-bottom: 1px solid var(--border); }
-.s:last-child { border-bottom: none; }
-.s-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; }
-.s-title { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700; color: var(--navy); }
-.s-sub { font-size: 11px; color: var(--txt3); }
+/* ── PANEL ────────────────────────────── */
+.panel{background:var(--white);border-radius:10px;border:1px solid var(--border);overflow:hidden}
+.ph{padding:11px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.ph h3{font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;color:var(--navy)}
+.ph .phr{font-size:10px;color:var(--txt3)}
+.pb{padding:14px 16px}
+.pb0{padding:0}
 
-/* ─── KPI STRIP ───────────────────────────────── */
-.kpi-strip {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 1px; background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: 8px; overflow: hidden;
+/* ── TABLE ────────────────────────────── */
+.t{width:100%;border-collapse:collapse;font-size:12px}
+.t thead{background:var(--navy)}
+.t th{padding:8px 12px;text-align:left;font-family:'Poppins',sans-serif;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
+.t th.r{text-align:right}
+.t td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--txt);vertical-align:middle}
+.t td.r{text-align:right;color:var(--txt2)}
+.t td.b{font-family:'Poppins',sans-serif;font-weight:700}
+.t td.hi{color:var(--gold);font-weight:700;font-family:'Poppins',sans-serif}
+.t td.gr{color:var(--teal);font-weight:500}
+.t tbody tr:nth-child(even){background:rgba(244,243,240,.6)}
+.t tbody tr.hl{background:rgba(184,154,94,.07)!important}
+.t tbody tr.hl td:first-child{border-left:2px solid var(--gold)}
+.t tbody tr.tot td{background:rgba(30,43,69,.06);font-family:'Poppins',sans-serif;font-weight:700}
+.t tbody tr:last-child td{border-bottom:none}
+
+/* ── TAGS ─────────────────────────────── */
+.tag{display:inline-block;padding:2px 8px;border-radius:99px;font-size:9.5px;font-weight:700}
+.tag.g{background:rgba(27,133,110,.12);color:var(--teal)}
+.tag.r{background:var(--redb);color:var(--red)}
+.tag.s{background:rgba(95,110,132,.1);color:var(--steel)}
+.tag.a{background:rgba(184,154,94,.14);color:#6b4e10}
+
+/* ── BAR CHART ────────────────────────── */
+.bc{display:flex;flex-direction:column;gap:7px}
+.br{display:grid;grid-template-columns:150px 1fr 70px;align-items:center;gap:8px}
+.bl{font-size:11.5px;color:var(--txt);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bt{background:var(--snow);border-radius:3px;overflow:hidden;height:9px}
+.bf{height:100%;border-radius:3px}
+.bf.go{background:var(--gold)}
+.bf.na{background:var(--navy)}
+.bf.te{background:var(--teal)}
+.bf.st{background:var(--steel)}
+.bf.rd{background:var(--red)}
+.bv{font-size:11px;color:var(--txt3);font-variant-numeric:tabular-nums}
+
+/* ── CALLOUT ──────────────────────────── */
+.co{border-radius:6px;padding:10px 13px;font-size:12px;line-height:1.55}
+.co.go{background:rgba(184,154,94,.1);border-left:2px solid var(--gold)}
+.co.te{background:var(--tealb);border-left:2px solid var(--teal)}
+.co.na{background:rgba(30,43,69,.05);border-left:2px solid var(--navy)}
+.co.rd{background:var(--redb);border-left:2px solid var(--red)}
+.co strong{font-weight:700;color:var(--navy)}
+.co.go strong{color:#6b4e10}
+.co.te strong{color:var(--teal)}
+
+/* ── FUNNEL ───────────────────────────── */
+.funnel{display:flex;flex-direction:column;align-items:center;gap:0}
+.fstage{width:100%;display:flex;flex-direction:column;align-items:center}
+.fb{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:11px 18px;
+  clip-path:polygon(0 0,100% 0,97% 100%,3% 100%);
+  min-height:52px;
 }
-.kpi { background: var(--white); padding: 13px 14px; }
-.kpi.dk { background: var(--navy); }
-.kpi.ac { background: var(--gold); }
-.kpi .v {
-  font-family: 'Poppins', sans-serif;
-  font-size: clamp(18px, 2vw, 26px); font-weight: 900;
-  line-height: 1; margin-bottom: 3px;
+.fn{font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;color:#fff}
+.fn.dk{color:var(--navy2)}
+.fsub{font-size:10px;color:rgba(255,255,255,.6);margin-top:1px}
+.fsub.dk{color:rgba(20,29,48,.55)}
+.fv{font-family:'Poppins',sans-serif;font-size:20px;font-weight:900;color:var(--gold);white-space:nowrap}
+.fv.dk{color:var(--navy2)}
+.fq{font-family:'Poppins',sans-serif;font-size:20px;font-weight:900;color:rgba(255,255,255,.35)}
+.fcon{height:10px;width:100%;display:flex;align-items:center;justify-content:center;position:relative}
+.fcon::before{content:'';width:1px;height:100%;background:rgba(30,43,69,.15)}
+.fpct{position:absolute;right:15%;font-size:9.5px;font-weight:700;color:var(--txt3);background:var(--snow);padding:0 5px;border-radius:2px}
+
+/* ── STAT GRID ────────────────────────── */
+.statg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{background:rgba(30,43,69,.04);border:1px solid var(--border);border-radius:8px;padding:12px 14px}
+.stat .sv{font-family:'Poppins',sans-serif;font-size:22px;font-weight:900;color:var(--navy);line-height:1}
+.stat .sv.go{color:var(--gold)}
+.stat .sv.te{color:var(--teal)}
+.stat .sl{font-size:10px;color:var(--txt3);margin-top:3px;line-height:1.3}
+
+/* ── INSIGHT BOX ──────────────────────── */
+.insight{
+  background:var(--navy);border-radius:8px;padding:16px 18px;
+  display:flex;gap:12px;align-items:flex-start;
 }
-.kpi .l { font-size: 9.5px; font-weight: 500; text-transform: uppercase; letter-spacing: .06em; line-height: 1.35; }
-.kpi .ss { font-size: 9.5px; margin-top: 2px; }
-.kpi.dk .v { color: var(--gold); }
-.kpi.dk .l { color: rgba(255,255,255,.38); }
-.kpi.dk .ss { color: rgba(255,255,255,.25); }
-.kpi.ac .v { color: var(--navy2); }
-.kpi.ac .l { color: rgba(20,29,48,.5); }
-.kpi.ac .ss { color: rgba(20,29,48,.38); }
-.kpi .v { color: var(--navy); }
-.kpi .l { color: var(--txt3); }
+.insight-icon{font-size:18px;flex-shrink:0;padding-top:1px}
+.insight-body h4{font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;color:var(--gold);margin-bottom:4px}
+.insight-body p{font-size:11.5px;color:rgba(255,255,255,.6);line-height:1.55}
 
-/* ─── GRID LAYOUTS ────────────────────────────── */
-.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
-.g21 { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; }
-.g12 { display: grid; grid-template-columns: 1fr 2fr; gap: 12px; }
+/* ── NEXT STEPS ───────────────────────── */
+.steps{display:flex;flex-direction:column;gap:10px}
+.step{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start}
+.step-n{font-family:'Poppins',sans-serif;font-size:15px;font-weight:900;color:var(--gold);flex-shrink:0;width:18px}
+.step-t{font-family:'Poppins',sans-serif;font-size:12.5px;font-weight:700;color:var(--navy);margin-bottom:3px}
+.step-d{font-size:11.5px;color:var(--txt2);line-height:1.5}
 
-/* ─── PANEL ───────────────────────────────────── */
-.panel { background: var(--white); border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
-.ph { padding: 10px 13px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-.ph h3 { font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 700; color: var(--navy); }
-.ph .phr { font-size: 10px; color: var(--txt3); }
-.pb { padding: 12px 13px; }
-.pb0 { padding: 0; }
+/* ── LEADS SUMMARY ────────────────────── */
+.leads-kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.lk{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:12px 14px;text-align:center}
+.lk .lv{font-family:'Poppins',sans-serif;font-size:26px;font-weight:900;color:var(--navy);line-height:1}
+.lk .ll{font-size:10px;color:var(--txt3);margin-top:4px;line-height:1.3}
+.lk.gold .lv{color:var(--gold)}
+.lk.teal .lv{color:var(--teal)}
+.lk.red .lv{color:var(--red)}
 
-/* ─── TABLE ───────────────────────────────────── */
-.t { width: 100%; border-collapse: collapse; font-size: 11.5px; }
-.t thead tr { background: var(--navy); }
-.t th { padding: 7px 10px; text-align: left; font-family: 'Poppins', sans-serif; font-size: 8.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
-.t th.r { text-align: right; }
-.t td { padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--txt); vertical-align: middle; }
-.t td.r { text-align: right; color: var(--txt2); }
-.t td.b { font-family: 'Poppins', sans-serif; font-weight: 700; }
-.t td.hi { color: var(--gold); font-weight: 700; font-family: 'Poppins', sans-serif; }
-.t td.gr { color: var(--teal); font-weight: 500; }
-.t td.rd { color: var(--red); }
-.t tbody tr:nth-child(even) { background: rgba(244,243,240,.7); }
-.t tbody tr.hl { background: rgba(184,154,94,.07) !important; }
-.t tbody tr.hl td:first-child { border-left: 2px solid var(--gold); }
-.t tbody tr.tot td { background: rgba(30,43,69,.05); font-family: 'Poppins', sans-serif; font-weight: 700; }
-.t tbody tr:last-child td { border-bottom: none; }
+/* ── DIVIDER ──────────────────────────── */
+.div{height:1px;background:var(--border);margin:8px 0}
 
-/* ─── TAGS ────────────────────────────────────── */
-.tag { display: inline-block; padding: 1px 7px; border-radius: 99px; font-size: 9px; font-weight: 700; letter-spacing: .03em; }
-.tag.g { background: rgba(27,133,110,.12); color: var(--teal); }
-.tag.r { background: var(--red-bg); color: var(--red); }
-.tag.s { background: rgba(95,110,132,.1); color: var(--steel); }
-.tag.a { background: rgba(184,154,94,.14); color: #6b4e10; }
-
-/* ─── BAR CHART ───────────────────────────────── */
-.bc { display: flex; flex-direction: column; gap: 6px; }
-.br { display: grid; grid-template-columns: 118px 1fr 58px; align-items: center; gap: 8px; }
-.bl { font-size: 11px; color: var(--txt); text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.bt { background: var(--snow); border-radius: 3px; overflow: hidden; height: 9px; }
-.bf { height: 100%; border-radius: 3px; }
-.bf.go { background: var(--gold); }
-.bf.na { background: var(--navy); }
-.bf.te { background: var(--teal); }
-.bf.st { background: var(--steel); }
-.bv { font-size: 10.5px; color: var(--txt3); font-variant-numeric: tabular-nums; }
-
-/* ─── CALLOUT ─────────────────────────────────── */
-.co { border-radius: 5px; padding: 8px 11px; font-size: 11px; line-height: 1.5; }
-.co.go { background: rgba(184,154,94,.1); border-left: 2px solid var(--gold); }
-.co.te { background: var(--teal-bg); border-left: 2px solid var(--teal); }
-.co.na { background: rgba(30,43,69,.06); border-left: 2px solid var(--navy); }
-.co.rd { background: var(--red-bg); border-left: 2px solid var(--red); }
-.co strong { font-weight: 700; color: var(--navy); }
-.co.go strong { color: #6b4e10; }
-.co.te strong { color: var(--teal); }
-.co.rd strong { color: var(--red); }
-
-/* ─── FUNNEL ──────────────────────────────────── */
-.funnel { display: flex; flex-direction: column; align-items: center; }
-.fs { width: 100%; display: flex; flex-direction: column; align-items: center; }
-.fb {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 10px 16px; height: 52px;
-  clip-path: polygon(0 0, 100% 0, 97% 100%, 3% 100%);
+/* ── FOOTER ───────────────────────────── */
+.footer{
+  background:var(--navy2);padding:16px 40px;margin-top:0;
+  display:flex;align-items:center;justify-content:space-between;
 }
-.fn { font-family: 'Poppins', sans-serif; font-size: 11.5px; font-weight: 700; color: #fff; }
-.fn.dk { color: var(--navy2); }
-.fsub { font-size: 9.5px; color: rgba(255,255,255,.6); }
-.fsub.dk { color: rgba(20,29,48,.55); }
-.fv { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 900; color: var(--gold); white-space: nowrap; }
-.fv.dk { color: var(--navy2); }
-.fcon { height: 10px; display: flex; align-items: center; justify-content: center; position: relative; width: 100%; }
-.fcon::before { content: ''; width: 1px; height: 100%; background: rgba(30,43,69,.15); }
-.fpct { position: absolute; right: 18%; font-size: 9px; font-weight: 700; color: var(--txt3); background: var(--snow); padding: 0 5px; border-radius: 2px; }
+.footer .fl{display:flex;align-items:center;gap:10px}
+.footer .fl img{height:24px;filter:brightness(0) invert(1);opacity:.5}
+.footer .fr{font-size:10px;color:rgba(255,255,255,.3);text-align:right}
 
-/* ─── MINI KPI ────────────────────────────────── */
-.mk3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.mk { background: rgba(30,43,69,.04); border: 1px solid var(--border); border-radius: 6px; padding: 9px 11px; }
-.mkv { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 900; color: var(--navy); line-height: 1; }
-.mkv.go { color: var(--gold); }
-.mkl { font-size: 9.5px; color: var(--txt3); margin-top: 3px; line-height: 1.3; }
-
-/* ─── REC ─────────────────────────────────────── */
-.rec { display: flex; gap: 9px; padding: 9px 0; border-bottom: 1px solid var(--border); }
-.rec:last-child { border-bottom: none; padding-bottom: 0; }
-.rn { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 900; color: var(--gold); width: 16px; flex-shrink: 0; }
-.rt { font-family: 'Poppins', sans-serif; font-size: 11.5px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
-.rd { font-size: 10.5px; color: var(--txt2); line-height: 1.5; }
-
-/* ─── DEVICE ──────────────────────────────────── */
-.devs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.dev { border: 1px solid var(--border); border-radius: 6px; padding: 10px; text-align: center; background: var(--snow); }
-.dv { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 900; color: var(--navy); }
-.dl { font-size: 9.5px; color: var(--txt3); margin-top: 2px; }
-
-/* ─── FOOTER ──────────────────────────────────── */
-.footer {
-  background: var(--navy2); padding: 10px 24px;
-  display: flex; align-items: center; justify-content: space-between;
-  font-size: 10px; color: rgba(255,255,255,.3);
-}
-
-/* ─── SCROLLBARS ──────────────────────────────── */
-.main::-webkit-scrollbar { width: 4px; }
-.main::-webkit-scrollbar-thumb { background: rgba(30,43,69,.18); border-radius: 2px; }
-.sidebar::-webkit-scrollbar { width: 3px; }
-.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.08); }
-
-@media (max-width: 900px) {
-  body { grid-template-columns: 1fr; grid-template-rows: 56px auto 1fr; }
-  .sidebar { position: relative; height: auto; flex-direction: row; overflow-x: auto; padding: 6px 10px; }
-  .nav-group { padding: 0; display: flex; flex-direction: row; gap: 2px; align-items: center; }
-  .nav-group-label { display: none; }
-  .kpi-strip { grid-template-columns: repeat(4, 1fr); }
-  .g2, .g21, .g12 { grid-template-columns: 1fr; }
+@media(max-width:900px){
+  .main{padding:20px 16px 40px}
+  .kpi-row{grid-template-columns:repeat(3,1fr)}
+  .g2,.g3,.g32,.g23{grid-template-columns:1fr}
+  .br{grid-template-columns:110px 1fr 55px}
+  .leads-kpi{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
@@ -276,646 +241,587 @@ section[id] { scroll-margin-top: 0; }
 
 <!-- TOPBAR -->
 <header class="topbar">
-  <div class="tb-brand">
-    <!-- Logo TLAGP en SVG embebido -->
-    <svg class="tb-logo-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Columnas superiores -->
-      <rect x="30" y="18" width="140" height="10" rx="2" fill="#B89A5E"/>
-      <rect x="45" y="33" width="110" height="7" rx="2" fill="#B89A5E"/>
-      <!-- Escudo / shield TLAGP simplificado -->
-      <path d="M40 50 L100 50 L160 50 L160 110 Q160 155 100 175 Q40 155 40 110 Z" fill="#B89A5E" opacity=".15"/>
-      <!-- L -->
-      <path d="M52 65 L52 140 L90 140 L90 128 L66 128 L66 65 Z" fill="var(--navy2)"/>
-      <!-- G -->
-      <path d="M100 65 Q148 65 148 105 Q148 145 100 145 Q80 145 70 132 L82 124 Q88 134 100 134 Q136 134 136 105 Q136 76 100 76 Q88 76 82 82 L82 98 L108 98 L108 110 L70 110 L70 82 Q80 65 100 65 Z" fill="var(--navy2)"/>
-    </svg>
-    <div class="tb-name">
-      THE LEGAL AGENCY<br>GROUP PANAMÁ
-      <span>Asesoría legal a tu alcance</span>
-    </div>
+  <div class="topbar-logo">
+    <img src="data:image/png;base64,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" alt="The Legal Agency Group Panamá">
   </div>
-  <div class="tb-center">Dashboard · Agosto 2026</div>
-  <div class="tb-right">
-    <span class="period">1 – 30 agosto 2026</span>
-    <span class="prep">Al Dente Marketing Studio</span>
+  <div class="topbar-right">
+    <span class="period-badge">Google Ads + Analytics · Agosto 2026</span>
+    <span class="prep-by">Al Dente Marketing Studio</span>
   </div>
 </header>
 
-<!-- SIDEBAR -->
-<nav class="sidebar">
-  <div class="nav-group">
-    <div class="nav-group-label">Google Ads</div>
-    <a href="#resumen" class="nav-item active"><div class="nav-dot"></div>Resumen general</a>
-    <a href="#campanas" class="nav-item"><div class="nav-dot"></div>Campañas</a>
-    <a href="#keywords" class="nav-item"><div class="nav-dot"></div>Palabras clave</a>
-    <a href="#geo" class="nav-item"><div class="nav-dot"></div>Geografía</a>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-label">Conversión</div>
-    <a href="#funnel" class="nav-item"><div class="nav-dot"></div>Funnel de marketing</a>
-    <a href="#leads" class="nav-item"><div class="nav-dot"></div>Leads y acciones</a>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-label">Sitio web GA4</div>
-    <a href="#ga4" class="nav-item"><div class="nav-dot"></div>Analytics</a>
-    <a href="#paginas" class="nav-item"><div class="nav-dot"></div>Páginas</a>
-    <a href="#canales" class="nav-item"><div class="nav-dot"></div>Canales</a>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-label">Cierre</div>
-    <a href="#leads-data" class="nav-item"><div class="nav-dot"></div>Leads reales (58)</a>
-    <a href="#recs" class="nav-item"><div class="nav-dot"></div>Recomendaciones</a>
-  </div>
-</nav>
+<div class="main">
 
-<!-- MAIN -->
-<main class="main">
+<!-- ── 01. RESUMEN EJECUTIVO ───────────── -->
+<div class="hero">
+  <div class="hero-title">TLAGP · Performance Dashboard</div>
+  <p class="hero-sub">Durante agosto, Google Ads generó 28,195 impresiones y 1,581 clics con una inversión de $367.69, concentrando la mayor parte del presupuesto en Servicios Migratorios.</p>
+  <div class="kpi-row">
+    <div class="kpi"><div class="v">28,195</div><div class="l">Impresiones totales</div></div>
+    <div class="kpi"><div class="v">1,581</div><div class="l">Clics en campañas</div></div>
+    <div class="kpi"><div class="v">5.61%</div><div class="l">CTR promedio</div></div>
+    <div class="kpi"><div class="v">$367.69</div><div class="l">Inversión Google Ads</div></div>
+    <div class="kpi hi"><div class="v">58</div><div class="l">Formularios reales identificados*</div></div>
+  </div>
+  <div class="note">
+    <strong>*Nota sobre los formularios:</strong> 58 formularios reales fueron identificados y depurados, excluyendo pruebas realizadas. Una de las campañas dirigía hacia una landing externa; los leads provenientes de esa experiencia deben ser validados con el proveedor que administra dicha landing.
+  </div>
+</div>
 
-  <!-- ① RESUMEN -->
-  <section class="s" id="resumen">
-    <div class="s-head">
-      <div class="s-title">Resumen general — Google Ads</div>
-      <div class="s-sub">Cuenta 523-163-4262 · 3 de 13 campañas con gasto real en agosto</div>
+<!-- ── 02. FUNNEL ──────────────────────── -->
+<div class="section">
+  <div class="section-label">
+    <div class="section-num">2</div>
+    <div><div class="section-title">De visibilidad a oportunidad comercial</div><div class="section-sub">El recorrido del usuario desde el anuncio hasta el lead</div></div>
+  </div>
+  <div class="g32" style="align-items:start">
+    <div class="panel">
+      <div class="ph"><h3>Funnel de conversión — agosto 2026</h3></div>
+      <div class="pb">
+        <div class="funnel">
+          <div class="fstage">
+            <div class="fb" style="background:var(--navy);width:100%">
+              <div><div class="fn">Impresiones de Google Ads</div><div class="fsub">Búsquedas activas de migración y residencia legal en Panamá</div></div>
+              <div class="fv">28,195</div>
+            </div>
+            <div class="fcon"><div class="fpct">↓ CTR 5.61%</div></div>
+          </div>
+          <div class="fstage">
+            <div class="fb" style="background:var(--navy3);width:92%">
+              <div><div class="fn">Clics en campañas</div><div class="fsub">Acceden al sitio o landing de TLAGP</div></div>
+              <div class="fv">1,581</div>
+            </div>
+            <div class="fcon"><div class="fpct">↓ Paid Search</div></div>
+          </div>
+          <div class="fstage">
+            <div class="fb" style="background:var(--steel);width:82%">
+              <div><div class="fn">Tráfico desde Google al sitio</div><div class="fsub">Sesiones Paid Search registradas en GA4</div></div>
+              <div class="fv">535</div>
+            </div>
+            <div class="fcon"><div class="fpct">↓ Formularios</div></div>
+          </div>
+          <div class="fstage">
+            <div class="fb" style="background:var(--gold);width:70%;clip-path:polygon(0 0,100% 0,97% 100%,3% 100%)">
+              <div><div class="fn dk">Formularios reales identificados</div><div class="fsub dk">Depurados y validados manualmente</div></div>
+              <div class="fv dk">58</div>
+            </div>
+            <div class="fcon"></div>
+          </div>
+          <div class="fstage">
+            <div class="fb" style="background:#4A5E78;width:56%;clip-path:polygon(0 0,100% 0,95% 100%,5% 100%)">
+              <div><div class="fn">Leads relevantes</div><div class="fsub">Pendiente validación con TLAGP</div></div>
+              <div class="fq">?</div>
+            </div>
+            <div class="fcon"></div>
+          </div>
+          <div class="fstage">
+            <div class="fb" style="background:var(--gold2);width:32%;clip-path:polygon(3% 0,97% 0,92% 100%,8% 100%)">
+              <div><div class="fn dk">Clientes cerrados</div><div class="fsub dk">Requiere datos de TLAGP</div></div>
+              <div class="fq" style="color:rgba(20,29,48,.35)">?</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="kpi-strip">
-      <div class="kpi dk"><div class="v">28,021</div><div class="l">Impresiones</div></div>
-      <div class="kpi dk"><div class="v">1,561</div><div class="l">Clics</div></div>
-      <div class="kpi dk"><div class="v">5.57%</div><div class="l">CTR promedio</div></div>
-      <div class="kpi dk"><div class="v">US$0.23</div><div class="l">CPC promedio</div></div>
-      <div class="kpi ac"><div class="v">136</div><div class="l">Conversiones</div><div class="ss">atribuidas a clics</div></div>
-      <div class="kpi ac"><div class="v">US$2.64</div><div class="l">Costo / conv.</div><div class="ss">promedio cuenta</div></div>
-      <div class="kpi"><div class="v">US$359.55</div><div class="l">Inversión total</div></div>
-      <div class="kpi"><div class="v">3 / 13</div><div class="l">Campañas activas</div><div class="ss">10 pausadas/eliminadas</div></div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="insight">
+        <div class="insight-icon">💡</div>
+        <div class="insight-body">
+          <h4>Ahora conectemos los leads con resultados</h4>
+          <p>Marketing puede medir la generación de interés y oportunidades. Para conectar estos resultados con el valor comercial real, necesitamos saber qué pasó después de cada formulario.</p>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="ph"><h3>¿Qué necesitamos de TLAGP?</h3></div>
+        <div class="pb">
+          <div style="display:flex;flex-direction:column;gap:8px;font-size:12px">
+            <div style="display:flex;gap:8px;align-items:center"><span style="color:var(--gold);font-weight:700">→</span><span>¿El lead fue relevante?</span></div>
+            <div class="div"></div>
+            <div style="display:flex;gap:8px;align-items:center"><span style="color:var(--gold);font-weight:700">→</span><span>¿Llegó a consulta?</span></div>
+            <div class="div"></div>
+            <div style="display:flex;gap:8px;align-items:center"><span style="color:var(--gold);font-weight:700">→</span><span>¿Contrató? ¿Qué servicio?</span></div>
+            <div class="div"></div>
+            <div style="display:flex;gap:8px;align-items:center"><span style="color:var(--gold);font-weight:700">→</span><span>¿De qué país provenía?</span></div>
+          </div>
+          <div class="co go" style="margin-top:12px">Con esta información podremos <strong>conectar la inversión de marketing con resultados comerciales</strong> e identificar qué búsquedas y mercados generan mayor valor para TLAGP.</div>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- ② CAMPAÑAS -->
-  <section class="s" id="campanas">
-    <div class="s-head">
-      <div class="s-title">Campañas</div>
-      <div class="s-sub">Una campaña = 74% inversión + 99% conversiones</div>
+<!-- ── 03. CAMPAÑAS ────────────────────── -->
+<div class="section">
+  <div class="section-label">
+    <div class="section-num">3</div>
+    <div><div class="section-title">¿Cómo se distribuyó la estrategia?</div><div class="section-sub">Tres campañas, tres objetivos y audiencias distintas</div></div>
+  </div>
+  <div class="panel" style="margin-bottom:12px">
+    <div class="pb0">
+      <table class="t">
+        <thead>
+          <tr>
+            <th>Campaña</th><th>Objetivo</th><th>Segmentación</th>
+            <th class="r">Impr.</th><th class="r">Clics</th><th class="r">CTR</th><th class="r">Inversión</th><th>Destino</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hl">
+            <td class="b">Migración Español / LATAM</td>
+            <td>Captar demanda migratoria</td>
+            <td>Panamá, Colombia, México, CR*</td>
+            <td class="r">19,361</td><td class="r hi">1,209</td>
+            <td class="r hi">6.24%</td><td class="r hi">$273.07</td>
+            <td>Servicios Migratorios</td>
+          </tr>
+          <tr>
+            <td>Branding / Panamá</td>
+            <td>Descubrimiento de TLAGP</td>
+            <td>Panamá</td>
+            <td class="r">7,638</td><td class="r">328</td>
+            <td class="r">4.29%</td><td class="r">$36.31</td>
+            <td>Home</td>
+          </tr>
+          <tr>
+            <td>Migración Inglés USA + CAN</td>
+            <td>Testear interés internacional</td>
+            <td>USA + Canadá</td>
+            <td class="r">1,196</td><td class="r">44</td>
+            <td class="r">3.68%</td><td class="r">$58.31</td>
+            <td>Landing en inglés</td>
+          </tr>
+          <tr class="tot">
+            <td colspan="3">TOTAL</td>
+            <td class="r">28,195</td><td class="r">1,581</td>
+            <td class="r">5.61%</td><td class="r">$367.69</td><td></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="panel" style="margin-bottom:10px">
+  </div>
+  <div class="co go">💡 El <strong>74% de la inversión</strong> se concentró en Migración Español/LATAM, alineando la mayor parte del presupuesto con el servicio prioritario: Servicios Migratorios. *El reporte geográfico registra actividad mínima desde España.</div>
+</div>
+
+<!-- ── 04. KEYWORDS ────────────────────── -->
+<div class="section">
+  <div class="section-label">
+    <div class="section-num">4</div>
+    <div><div class="section-title">¿Qué estaba buscando la gente?</div><div class="section-sub">Las búsquedas reflejan interés activo en migración, residencia y asesoría legal</div></div>
+  </div>
+  <div class="g2">
+    <div class="panel">
+      <div class="ph"><h3>Keywords con mayor respuesta</h3><span class="phr">clics y CTR</span></div>
       <div class="pb0">
         <table class="t">
-          <thead>
-            <tr>
-              <th>Campaña</th><th>Estado</th>
-              <th class="r">Impr.</th><th class="r">Clics</th><th class="r">CTR</th>
-              <th class="r">Inversión</th><th class="r">Conv.</th>
-              <th class="r">% Conv.</th><th class="r">CPC</th><th class="r">$/conv.</th>
-            </tr>
-          </thead>
+          <thead><tr><th>Keyword</th><th class="r">Clics</th><th class="r">CTR</th></tr></thead>
           <tbody>
-            <tr class="hl">
-              <td class="b">Campaña Junio 2026 – Español LATAM</td>
-              <td><span class="tag g">Activa</span></td>
-              <td class="r">19,187</td><td class="r">1,189</td>
-              <td class="r hi">6.20%</td><td class="r">US$264.93</td>
-              <td class="r hi">135</td><td class="r hi">11.35%</td>
-              <td class="r">US$0.22</td><td class="r hi">US$1.96</td>
-            </tr>
-            <tr>
-              <td>Branding-Home-PTY</td>
-              <td><span class="tag s">Detenida</span></td>
-              <td class="r">7,638</td><td class="r">328</td>
-              <td class="r">4.29%</td><td class="r">US$36.31</td>
-              <td class="r rd">0</td><td class="r">0.00%</td>
-              <td class="r">US$0.11</td><td class="r">—</td>
-            </tr>
-            <tr>
-              <td>Search_Migracion_Inglés USA/CAN</td>
-              <td><span class="tag r">Detenida</span></td>
-              <td class="r">1,196</td><td class="r">~44</td>
-              <td class="r">3.68%</td><td class="r">US$58.31</td>
-              <td class="r">1</td><td class="r">2.27%</td>
-              <td class="r">US$1.33</td><td class="r">US$58.31</td>
-            </tr>
-            <tr class="tot">
-              <td colspan="2">TOTAL</td>
-              <td class="r">28,021</td><td class="r">1,561</td>
-              <td class="r">5.57%</td><td class="r">US$359.55</td>
-              <td class="r">136</td><td class="r">8.71%</td>
-              <td class="r">US$0.23</td><td class="r">US$2.64</td>
-            </tr>
+            <tr class="hl"><td class="b">Servicios migratorios</td><td class="r">221</td><td class="r hi">12.54%</td></tr>
+            <tr><td>Panamá migración</td><td class="r">170</td><td class="r">13.72%</td></tr>
+            <tr><td>Visa residente Panamá</td><td class="r">35</td><td class="r">12.50%</td></tr>
+            <tr><td>Residencia permanente en Panamá</td><td class="r">32</td><td class="r">10.39%</td></tr>
+            <tr><td>Asesoría migratoria Panamá</td><td class="r">11</td><td class="r">10.48%</td></tr>
+            <tr><td>Abogados de migración en Panamá</td><td class="r">10</td><td class="r">17.86%</td></tr>
+            <tr><td>Abogado migratorio Panamá</td><td class="r">9</td><td class="r">20.00%</td></tr>
           </tbody>
         </table>
       </div>
-    </div>
-    <div class="co go">🚦 La campaña LATAM opera con <strong>US$9.90/día</strong> y nivel de optimización <strong>57.9%</strong>. Google la marca como <em>limitada por volumen de búsquedas</em> — hay margen real para escalar.</div>
-  </section>
-
-  <!-- ③ KEYWORDS -->
-  <section class="s" id="keywords">
-    <div class="s-head">
-      <div class="s-title">Palabras clave</div>
-      <div class="s-sub">De 623 keywords, un grupo reducido genera el 100% del rendimiento</div>
-    </div>
-    <div class="g2">
-      <div class="panel">
-        <div class="ph"><h3 style="color:var(--teal)">✅ Las que convirtieron</h3><span class="phr">tasa de conversión</span></div>
-        <div class="pb">
-          <div class="bc">
-            <div class="br"><div class="bl">abogados de migracion</div><div class="bt"><div class="bf te" style="width:100%"></div></div><div class="bv">66.67% ⭐</div></div>
-            <div class="br"><div class="bl">visa residente panama</div><div class="bt"><div class="bf te" style="width:57%"></div></div><div class="bv">38.24%</div></div>
-            <div class="br"><div class="bl">asesoria migratoria</div><div class="bt"><div class="bf te" style="width:55%"></div></div><div class="bv">36.36%</div></div>
-            <div class="br"><div class="bl">panama migración</div><div class="bt"><div class="bf go" style="width:52%"></div></div><div class="bv">34.36%</div></div>
-            <div class="br"><div class="bl">residencia permanente</div><div class="bt"><div class="bf go" style="width:45%"></div></div><div class="bv">30.00%</div></div>
-            <div class="br"><div class="bl">servicios migratorios</div><div class="bt"><div class="bf go" style="width:25%"></div></div><div class="bv">16.98%</div></div>
-          </div>
-          <div class="co te" style="margin-top:9px"><strong>"abogados de migracion en panama"</strong>: 6 conv. de 9 clics. Volumen bajo, calidad altísima — candidata prioritaria para escalar.</div>
-        </div>
-      </div>
-      <div class="panel">
-        <div class="ph"><h3 style="color:var(--red)">⚠ Gasto sin conversión</h3><span class="phr">costo vs. resultado</span></div>
-        <div class="pb0">
-          <table class="t">
-            <thead><tr><th>Keyword</th><th class="r">Costo</th><th class="r">Conv.</th><th>Nota</th></tr></thead>
-            <tbody>
-              <tr><td>second residency panama</td><td class="r">~US$19</td><td class="r rd">0</td><td><span class="tag s">EN/pausada</span></td></tr>
-              <tr><td>how to get residency</td><td class="r">~US$15</td><td class="r rd">0</td><td><span class="tag s">EN/pausada</span></td></tr>
-              <tr><td>abogados en panama</td><td class="r">~US$11</td><td class="r rd">0</td><td><span class="tag s">branding</span></td></tr>
-              <tr><td>asesoria legal empresarial</td><td class="r">~US$4</td><td class="r rd">0</td><td><span class="tag s">branding</span></td></tr>
-              <tr><td>migra panama</td><td class="r">~US$0.18</td><td class="r rd">0</td><td><span class="tag a">CTR 21.25% ⚡</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="pb"><div class="co na">Keywords en inglés gastaron ~<strong>US$50 combinados con 0 conversiones</strong>. Problema: anuncio en inglés → sitio en español. Necesita landing localizada.</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ④ GEOGRAFÍA -->
-  <section class="s" id="geo">
-    <div class="s-head">
-      <div class="s-title">Geografía</div>
-      <div class="s-sub">Colombia = mayor volumen · Panamá = mejor calidad y menor costo por conversión</div>
-    </div>
-    <div class="g2">
-      <div class="panel">
-        <div class="ph"><h3>Ads — conversión por país</h3><span class="phr">campaña LATAM activa</span></div>
-        <div class="pb0">
-          <table class="t">
-            <thead><tr><th>País</th><th class="r">Clics</th><th class="r">Conv.</th><th class="r">% Conv.</th><th class="r">$/conv.</th></tr></thead>
-            <tbody>
-              <tr class="hl"><td class="b">🇵🇦 Panamá</td><td class="r">307</td><td class="r hi">89</td><td class="r hi">28.99%</td><td class="r hi">US$1.49</td></tr>
-              <tr><td>🇨🇴 Colombia</td><td class="r">455</td><td class="r">34</td><td class="r">7.47%</td><td class="r">US$2.76</td></tr>
-              <tr><td>🇲🇽 México</td><td class="r">261</td><td class="r">7</td><td class="r">2.68%</td><td class="r">US$3.73</td></tr>
-              <tr><td>🇨🇷 Costa Rica</td><td class="r">~34</td><td class="r">4</td><td class="r gr">11.76%</td><td class="r">US$1.89</td></tr>
-              <tr><td>🇺🇸 EE.UU.</td><td class="r">~9</td><td class="r">1</td><td class="r">11.11%</td><td class="r">US$12.58</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="pb"><div class="co go">Panamá convierte <strong>4× mejor</strong> que Colombia (28.99% vs. 7.47%) al costo más bajo. El mercado local es el de mayor calidad.</div></div>
-      </div>
-      <div class="panel">
-        <div class="ph"><h3>GA4 — usuarios por país (sitio completo)</h3><span class="phr">duración media de sesión</span></div>
-        <div class="pb">
-          <div class="bc">
-            <div class="br"><div class="bl">🇨🇴 Colombia</div><div class="bt"><div class="bf na" style="width:100%"></div></div><div class="bv">1,179 · 1m11s</div></div>
-            <div class="br"><div class="bl">🇪🇨 Ecuador</div><div class="bt"><div class="bf na" style="width:44%"></div></div><div class="bv">522 · 1m47s</div></div>
-            <div class="br"><div class="bl">🇵🇦 Panamá</div><div class="bt"><div class="bf go" style="width:25%"></div></div><div class="bv">293 · 1m33s</div></div>
-            <div class="br"><div class="bl">🇺🇸 Estados Unidos</div><div class="bt"><div class="bf st" style="width:19%"></div></div><div class="bv">219 · 59s</div></div>
-            <div class="br"><div class="bl">🇲🇽 México</div><div class="bt"><div class="bf st" style="width:16%"></div></div><div class="bv">184 · 1m53s</div></div>
-            <div class="br"><div class="bl">🇻🇪 Venezuela</div><div class="bt"><div class="bf te" style="width:4%"></div></div><div class="bv">42 · 2m03s</div></div>
-            <div class="br"><div class="bl">🇨🇱 Chile</div><div class="bt"><div class="bf te" style="width:2%"></div></div><div class="bv">21 · 3m59s ⭐</div></div>
-          </div>
-          <div class="co na" style="margin-top:9px">Chile, Cuba y Venezuela: pocos usuarios pero <strong>2–4 min de sesión media</strong> — consultas muy deliberadas de alto valor potencial.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ⑤ FUNNEL -->
-  <section class="s" id="funnel" style="background:var(--navy2)">
-    <div class="s-head">
-      <div class="s-title" style="color:var(--gold)">Funnel de marketing</div>
-      <div class="s-sub" style="color:rgba(255,255,255,.4)">Del anuncio en Google al lead generado · agosto 2026</div>
-    </div>
-    <div class="g21" style="align-items:start">
-      <!-- Funnel visual -->
-      <div class="funnel">
-        <div class="fs">
-          <div class="fb" style="background:var(--navy3);width:100%">
-            <div><div class="fn">👁 Ve el anuncio en Google</div><div class="fsub">Búsquedas de migración, residencia, visa en Panamá</div></div>
-            <div class="fv">28,021</div>
-          </div>
-          <div class="fcon"><div class="fpct" style="background:var(--navy2);color:rgba(255,255,255,.4)">↓ CTR 5.57%</div></div>
-        </div>
-        <div class="fs">
-          <div class="fb" style="background:#2D4070;width:91%">
-            <div><div class="fn">🖱 Clic en el anuncio</div><div class="fsub">Aterriza en /servicios-migratorios/ (99% del tráfico)</div></div>
-            <div class="fv">1,561</div>
-          </div>
-          <div class="fcon"><div class="fpct" style="background:var(--navy2);color:rgba(255,255,255,.4)">↓ 49.3% engaged</div></div>
-        </div>
-        <div class="fs">
-          <div class="fb" style="background:var(--steel);width:80%">
-            <div><div class="fn">📄 Navega el sitio</div><div class="fsub">GA4 · 3,508 sesiones totales · 1m 24s duración media</div></div>
-            <div class="fv">3,508</div>
-          </div>
-          <div class="fcon"><div class="fpct" style="background:var(--navy2);color:rgba(255,255,255,.4)">↓ intención de contacto</div></div>
-        </div>
-        <div class="fs">
-          <div class="fb" style="background:#4A5E78;width:67%">
-            <div><div class="fn">💬 Inicia contacto</div><div class="fsub">62 clics WhatsApp + 95 inicios de formulario</div></div>
-            <div class="fv">157</div>
-          </div>
-          <div class="fcon"></div>
-        </div>
-        <div class="fs">
-          <div class="fb" style="background:var(--gold);width:54%;clip-path:polygon(0 0,100% 0,97% 100%,3% 100%)">
-            <div><div class="fn dk">📝 Completa el formulario</div><div class="fsub dk">generate_lead confirmado por GA4</div></div>
-            <div class="fv dk">237</div>
-          </div>
-          <div class="fcon"></div>
-        </div>
-        <div class="fs">
-          <div class="fb" style="background:var(--gold2);width:40%;clip-path:polygon(3% 0,97% 0,93% 100%,7% 100%)">
-            <div><div class="fn dk">🎯 Lead generado</div><div class="fsub dk">Formularios confirmados + WhatsApp</div></div>
-            <div class="fv dk" style="font-size:22px">299</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Breakdown derecho -->
-      <div style="display:flex;flex-direction:column;gap:9px">
-        <div class="mk3">
-          <div class="mk" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.08)">
-            <div class="mkv go">237</div>
-            <div class="mkl" style="color:rgba(255,255,255,.4)">Formularios<br>completados (GA4)</div>
-          </div>
-          <div class="mk" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.08)">
-            <div class="mkv go">62</div>
-            <div class="mkl" style="color:rgba(255,255,255,.4)">Clics a<br>WhatsApp</div>
-          </div>
-          <div class="mk" style="background:rgba(184,154,94,.15);border-color:rgba(184,154,94,.3)">
-            <div class="mkv go">116</div>
-            <div class="mkl" style="color:rgba(255,255,255,.4)">Forms via Ads<br>(clics pagados)</div>
-          </div>
-        </div>
-
-        <div style="background:rgba(255,255,255,.04);border-radius:6px;padding:11px;border:1px solid rgba(255,255,255,.07)">
-          <div style="font-family:'Poppins',sans-serif;font-size:9.5px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:9px">WhatsApp por página</div>
-          <div class="bc">
-            <div class="br" style="grid-template-columns:120px 1fr 50px"><div class="bl" style="color:rgba(255,255,255,.65)">Abogados Migratorios</div><div class="bt" style="background:rgba(255,255,255,.08)"><div class="bf te" style="width:100%"></div></div><div class="bv" style="color:rgba(255,255,255,.4)">36 · 58%</div></div>
-            <div class="br" style="grid-template-columns:120px 1fr 50px"><div class="bl" style="color:rgba(255,255,255,.65)">Contacta Abogado</div><div class="bt" style="background:rgba(255,255,255,.08)"><div class="bf go" style="width:42%"></div></div><div class="bv" style="color:rgba(255,255,255,.4)">15</div></div>
-            <div class="br" style="grid-template-columns:120px 1fr 50px"><div class="bl" style="color:rgba(255,255,255,.65)">LP – SA/cuenta</div><div class="bt" style="background:rgba(255,255,255,.08)"><div class="bf st" style="width:19%"></div></div><div class="bv" style="color:rgba(255,255,255,.4)">7</div></div>
-            <div class="br" style="grid-template-columns:120px 1fr 50px"><div class="bl" style="color:rgba(255,255,255,.65)">Corporativo / EN</div><div class="bt" style="background:rgba(255,255,255,.08)"><div class="bf st" style="width:8%"></div></div><div class="bv" style="color:rgba(255,255,255,.4)">3+3</div></div>
-          </div>
-        </div>
-
-        <div class="co go" style="border-color:rgba(184,154,94,.5)">📋 El <strong>formulario domina</strong>: 237 envíos vs. 62 WA. Asegurar seguimiento CRM en cada envío.</div>
-        <div class="co te" style="border-color:rgba(27,133,110,.4)">💬 <strong>Abogados Migratorios</strong> = 58% de los clics a WhatsApp y el 100% del formulario de migración (97 envíos).</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ⑥ LEADS -->
-  <section class="s" id="leads">
-    <div class="s-head">
-      <div class="s-title">Leads y acciones de conversión</div>
-      <div class="s-sub">Google Ads configurado + eventos GA4</div>
-    </div>
-    <div class="g2">
-      <div class="panel">
-        <div class="ph"><h3>Acciones — Google Ads</h3><span class="phr">atribuidas a clics pagados</span></div>
-        <div class="pb0">
-          <table class="t">
-            <thead><tr><th>Acción</th><th>Estado</th><th class="r">Conv.</th></tr></thead>
-            <tbody>
-              <tr class="hl"><td class="b">Formulario_migracion</td><td><span class="tag g">Activo</span></td><td class="r hi">64</td></tr>
-              <tr class="hl"><td class="b">Formulario enviado — Contáctenos</td><td><span class="tag g">Activo</span></td><td class="r hi">52</td></tr>
-              <tr><td>Conversación iniciada (WhatsApp)</td><td><span class="tag g">Activo</span></td><td class="r">18</td></tr>
-              <tr><td>Registro (carga de página)</td><td><span class="tag a">Esperando</span></td><td class="r">1–2</td></tr>
-              <tr><td class="rd">generation_lead</td><td><span class="tag r">Config. incorrecta ⚠</span></td><td class="r rd">0–2</td></tr>
-              <tr><td style="color:var(--txt3)">TLAG Form_home</td><td><span class="tag s">Sin datos</span></td><td class="r">0</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="pb"><div class="co rd"><strong>generation_lead marcada como "Configuración incorrecta"</strong> en Google Ads. Sus datos no son confiables hasta corregirla.</div></div>
-      </div>
-      <div class="panel">
-        <div class="ph"><h3>Eventos clave GA4</h3><span class="phr">sitio completo · agosto</span></div>
-        <div class="pb">
-          <div class="bc">
-            <div class="br"><div class="bl">generate_lead</div><div class="bt"><div class="bf go" style="width:100%"></div></div><div class="bv">237</div></div>
-            <div class="br"><div class="bl">Conoce_al_equipo</div><div class="bt"><div class="bf st" style="width:95%"></div></div><div class="bv">225</div></div>
-            <div class="br"><div class="bl">solicitar_orientacion</div><div class="bt"><div class="bf st" style="width:88%"></div></div><div class="bv">209</div></div>
-            <div class="br"><div class="bl">clic_preasesoria</div><div class="bt"><div class="bf na" style="width:64%"></div></div><div class="bv">151</div></div>
-            <div class="br"><div class="bl">Formulario_migracion</div><div class="bt"><div class="bf te" style="width:41%"></div></div><div class="bv">97</div></div>
-            <div class="br"><div class="bl">form_start</div><div class="bt"><div class="bf te" style="width:40%"></div></div><div class="bv">95</div></div>
-            <div class="br"><div class="bl">Clic WhatsApp (total)</div><div class="bt"><div class="bf te" style="width:26%"></div></div><div class="bv">62</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ⑦ GA4 ANALYTICS -->
-  <section class="s" id="ga4">
-    <div class="s-head">
-      <div class="s-title">Sitio web — Google Analytics 4</div>
-      <div class="s-sub">Total propiedad · 1–30 agosto 2026</div>
-    </div>
-    <div class="kpi-strip" style="grid-template-columns:repeat(6,1fr);margin-bottom:12px">
-      <div class="kpi dk"><div class="v">3,085</div><div class="l">Usuarios activos</div></div>
-      <div class="kpi dk"><div class="v">3,508</div><div class="l">Sesiones</div><div class="ss">3.39 págs/sesión</div></div>
-      <div class="kpi dk"><div class="v">1m 24s</div><div class="l">Duración media</div></div>
-      <div class="kpi dk"><div class="v">49.3%</div><div class="l">Tasa interacción</div></div>
-      <div class="kpi ac"><div class="v">237</div><div class="l">Formularios</div><div class="ss">generate_lead</div></div>
-      <div class="kpi ac"><div class="v">62</div><div class="l">Clics WhatsApp</div><div class="ss">2.0% de sesiones</div></div>
-    </div>
-
-    <div class="g2">
-      <div class="panel">
-        <div class="ph"><h3>Dispositivos — campaña activa</h3></div>
-        <div class="pb">
-          <div class="devs">
-            <div class="dev" style="border-top:2px solid var(--navy)">
-              <div style="font-size:22px">📱</div>
-              <div class="dv">98%</div>
-              <div style="font-family:'Poppins',sans-serif;font-size:11.5px;font-weight:700;color:var(--navy);margin-top:2px">Móvil</div>
-              <div class="dl">1,166 clics · 125 conv.<br>Conv. rate: 10.72%</div>
-            </div>
-            <div class="dev" style="border-top:2px solid var(--gold)">
-              <div style="font-size:22px">💻</div>
-              <div class="dv" style="color:var(--gold)">40%</div>
-              <div style="font-family:'Poppins',sans-serif;font-size:11.5px;font-weight:700;color:var(--navy);margin-top:2px">Escritorio</div>
-              <div class="dl">~20 clics · 8 conv.<br>Conv. rate: <strong>40.00% 🔥</strong></div>
-            </div>
-            <div class="dev" style="border-top:2px solid var(--steel)">
-              <div style="font-size:22px">📟</div>
-              <div class="dv" style="color:var(--steel)">66%</div>
-              <div style="font-family:'Poppins',sans-serif;font-size:11.5px;font-weight:700;color:var(--navy);margin-top:2px">Tablet</div>
-              <div class="dl">~3 clics · 2 conv.<br>Bajo volumen</div>
-            </div>
-          </div>
-          <div class="co na" style="margin-top:9px">Escritorio convierte <strong>4× mejor</strong> que móvil (40% vs. 10.72%). Priorizar UX mobile-first para cerrar ese gap.</div>
-        </div>
-      </div>
-
-      <div id="canales">
-        <div class="panel">
-          <div class="ph"><h3>Canales — calidad vs. volumen</h3><span class="phr">tasa interacción = calidad del clic</span></div>
-          <div class="pb0">
-            <table class="t">
-              <thead><tr><th>Canal / fuente</th><th class="r">Sesiones</th><th class="r">%</th><th class="r">% Interacción</th></tr></thead>
-              <tbody>
-                <tr><td>Meta (fb/paid)</td><td class="r">1,584</td><td class="r">45.2%</td><td class="r">45.4%</td></tr>
-                <tr class="hl"><td class="b">Google Ads (google/cpc)</td><td class="r">1,089</td><td class="r">31.0%</td><td class="r hi">55.7%</td></tr>
-                <tr><td>Instagram (ig/paid)</td><td class="r">351</td><td class="r">10.0%</td><td class="r">40.7%</td></tr>
-                <tr><td>Directo</td><td class="r">134</td><td class="r">3.8%</td><td class="r">34.3%</td></tr>
-                <tr><td>Google Orgánico</td><td class="r">87</td><td class="r">2.5%</td><td class="r gr">75.9% ⭐</td></tr>
-                <tr><td class="rd">(not set) — posible bot</td><td class="r rd">76</td><td class="r">2.2%</td><td class="r rd">0.0%</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="pb"><div class="co go">Google Ads entrega <strong>55.7% de tasa de interacción</strong> vs. 45.4% de Meta. Con el 31% del volumen, aporta la conversión más eficiente del mix.</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ⑧ PÁGINAS -->
-  <section class="s" id="paginas">
-    <div class="s-head">
-      <div class="s-title">Páginas más visitadas</div>
-      <div class="s-sub">3 landings concentran ~60% del tráfico y revelan la intención de consulta</div>
     </div>
     <div class="panel">
+      <div class="ph"><h3>Distribución de clics top keywords</h3><span class="phr">volumen relativo</span></div>
+      <div class="pb">
+        <div class="bc">
+          <div class="br"><div class="bl">Servicios migratorios</div><div class="bt"><div class="bf go" style="width:100%"></div></div><div class="bv">221</div></div>
+          <div class="br"><div class="bl">Panamá migración</div><div class="bt"><div class="bf go" style="width:77%"></div></div><div class="bv">170</div></div>
+          <div class="br"><div class="bl">Visa residente Panamá</div><div class="bt"><div class="bf te" style="width:16%"></div></div><div class="bv">35</div></div>
+          <div class="br"><div class="bl">Residencia permanente</div><div class="bt"><div class="bf te" style="width:14%"></div></div><div class="bv">32</div></div>
+          <div class="br"><div class="bl">Asesoría migratoria</div><div class="bt"><div class="bf st" style="width:5%"></div></div><div class="bv">11 · CTR 17.86%⭐</div></div>
+        </div>
+        <div class="co te" style="margin-top:12px">Las búsquedas muestran <strong>interés real alrededor del servicio priorizado</strong>, con respuesta especialmente alta en términos que combinan necesidad migratoria y asesoría legal.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 05. GEOGRAFÍA ───────────────────── -->
+<div class="section">
+  <div class="section-label">
+    <div class="section-num">5</div>
+    <div><div class="section-title">¿Cómo respondió cada mercado?</div><div class="section-sub">La respuesta varió según el objetivo y mercado de cada campaña</div></div>
+  </div>
+  <div class="g3">
+    <!-- LATAM -->
+    <div class="panel">
+      <div class="ph" style="background:var(--navy)"><h3 style="color:var(--gold)">Migración Español / LATAM</h3></div>
       <div class="pb0">
         <table class="t">
-          <thead><tr><th>Página / landing</th><th class="r">Usuarios</th><th class="r">Vistas</th><th>Motivo de visita</th></tr></thead>
+          <thead><tr><th>País</th><th class="r">Clics</th></tr></thead>
           <tbody>
-            <tr class="hl"><td class="b">LP – SA, fundación, cuenta bancaria</td><td class="r">1,157</td><td class="r hi">1,527</td><td><span class="tag g">Constitución empresa</span></td></tr>
-            <tr><td>Inicio — Asesoría legal</td><td class="r">828</td><td class="r">1,154</td><td><span class="tag s">Home general</span></td></tr>
-            <tr><td>LP – Jubilados y pensionados</td><td class="r">519</td><td class="r">694</td><td><span class="tag g">Visa jubilado</span></td></tr>
-            <tr class="hl"><td class="b">Abogados Migratorios | Visas y Residencias</td><td class="r">355</td><td class="r hi">483</td><td><span class="tag g">Migración / residencia</span></td></tr>
-            <tr><td>LP – USA (ES)</td><td class="r">253</td><td class="r">312</td><td><span class="tag a">Mercado angloparlante</span></td></tr>
-            <tr><td>Gracias (confirmación formulario)</td><td class="r">216</td><td class="r">236</td><td><span class="tag g">Conversión confirmada</span></td></tr>
-            <tr><td>Contacta a un Abogado</td><td class="r">97</td><td class="r">123</td><td><span class="tag s">Contacto directo</span></td></tr>
-            <tr><td class="rd">Página no encontrada (404) ⚠</td><td class="r rd">15</td><td class="r rd">26</td><td><span class="tag r">Enlace roto</span></td></tr>
+            <tr><td class="b">🇨🇴 Colombia</td><td class="r hi">462</td></tr>
+            <tr><td>🇵🇦 Panamá</td><td class="r">318</td></tr>
+            <tr><td>🇲🇽 México</td><td class="r">263</td></tr>
+            <tr><td>🇨🇷 Costa Rica</td><td class="r">34</td></tr>
+            <tr><td>🇪🇸 España</td><td class="r">2</td></tr>
           </tbody>
         </table>
       </div>
+      <div class="pb"><div class="co na">Colombia generó el <strong>mayor volumen</strong> dentro de LATAM, seguido por Panamá y México.</div></div>
     </div>
-  </section>
-
-  <!-- ⑩ LEADS REALES -->
-  <section class="s" id="leads-data">
-    <div class="s-head">
-      <div class="s-title">Leads reales — Campañas agosto 2026</div>
-      <div class="s-sub">58 formularios recibidos (jul–ago 2026) · análisis manual de cada mensaje</div>
+    <!-- Branding -->
+    <div class="panel">
+      <div class="ph" style="background:var(--steel)"><h3 style="color:#fff">Branding / Panamá</h3></div>
+      <div class="pb">
+        <div class="statg" style="grid-template-columns:repeat(2,1fr);margin-bottom:12px">
+          <div class="stat"><div class="sv">7,638</div><div class="sl">Impresiones</div></div>
+          <div class="stat"><div class="sv">328</div><div class="sl">Clics</div></div>
+          <div class="stat"><div class="sv">4.29%</div><div class="sl">CTR</div></div>
+          <div class="stat"><div class="sv">$36.31</div><div class="sl">Invertidos</div></div>
+        </div>
+        <div class="co na">Branding generó <strong>328 clics</strong> en el mercado panameño con inversión controlada, cumpliendo su función de generar descubrimiento de TLAGP.</div>
+      </div>
     </div>
-
-    <!-- Resumen: dos formularios -->
-    <div class="g2" style="margin-bottom:12px">
-
-      <!-- Formulario Migración (campaña pagada) -->
-      <div class="panel">
-        <div class="ph" style="background:var(--navy)">
-          <h3 style="color:var(--gold)">📋 Formulario Migración — tráfico pagado</h3>
-          <span class="phr" style="color:rgba(255,255,255,.4)">43 leads · con gclid (Google Ads)</span>
-        </div>
-        <div class="pb">
-          <div class="bc" style="margin-bottom:12px">
-            <div class="br"><div class="bl">Consulta genérica</div><div class="bt"><div class="bf st" style="width:100%"></div></div><div class="bv">10 · 23.3%</div></div>
-            <div class="br"><div class="bl">Residencia / relocation</div><div class="bt"><div class="bf te" style="width:80%"></div></div><div class="bv">8 · 18.6%</div></div>
-            <div class="br"><div class="bl">Visa de turismo</div><div class="bt"><div class="bf go" style="width:60%"></div></div><div class="bv">6 · 14.0%</div></div>
-            <div class="br"><div class="bl">Fuera de alcance</div><div class="bt"><div class="bf" style="width:60%;background:var(--red)"></div></div><div class="bv">6 · 14.0%</div></div>
-            <div class="br"><div class="bl">Trámite PPT</div><div class="bt"><div class="bf na" style="width:50%"></div></div><div class="bv">5 · 11.6%</div></div>
-            <div class="br"><div class="bl">Spam / baja calidad</div><div class="bt"><div class="bf" style="width:40%;background:var(--red)"></div></div><div class="bv">4 · 9.3%</div></div>
-            <div class="br"><div class="bl">Casos complejos</div><div class="bt"><div class="bf na" style="width:20%"></div></div><div class="bv">2 · 4.7%</div></div>
-            <div class="br"><div class="bl">Visa de tránsito</div><div class="bt"><div class="bf na" style="width:20%"></div></div><div class="bv">2 · 4.7%</div></div>
-          </div>
-          <!-- KPIs rápidos -->
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px">
-            <div class="mk"><div class="mkv go">18</div><div class="mkl">Leads calificados<br>(residencia + consulta)</div></div>
-            <div class="mk"><div class="mkv" style="color:var(--teal)">41.9%</div><div class="mkl">Tasa de calidad<br>sobre 43 leads</div></div>
-            <div class="mk"><div class="mkv" style="color:var(--red)">10</div><div class="mkl">Descartables<br>(spam + fuera alcance)</div></div>
-          </div>
-          <div class="co go">🎯 <strong>Residencia y relocation</strong> son los leads de mayor valor: ciudadanos extranjeros listos para contratar asesoría legal completa. Representan el 18.6% del total.</div>
-        </div>
-      </div>
-
-      <!-- Formulario General (orgánico) -->
-      <div class="panel">
-        <div class="ph" style="background:var(--steel)">
-          <h3 style="color:#fff">📋 Formulario Contáctenos — tráfico orgánico</h3>
-          <span class="phr" style="color:rgba(255,255,255,.45)">15 leads · sin gclid (no atribuibles a Ads)</span>
-        </div>
-        <div class="pb">
-          <div class="bc" style="margin-bottom:12px">
-            <div class="br"><div class="bl">Ambiguo / sin info</div><div class="bt"><div class="bf st" style="width:100%"></div></div><div class="bv">4 · 26.7%</div></div>
-            <div class="br"><div class="bl">Migración mal-enrutada</div><div class="bt"><div class="bf te" style="width:100%"></div></div><div class="bv">4 · 26.7%</div></div>
-            <div class="br"><div class="bl">Spam</div><div class="bt"><div class="bf" style="width:75%;background:var(--red)"></div></div><div class="bv">3 · 20.0%</div></div>
-            <div class="br"><div class="bl">Derecho de familia</div><div class="bt"><div class="bf go" style="width:50%"></div></div><div class="bv">2 · 13.3%</div></div>
-            <div class="br"><div class="bl">Derecho penal</div><div class="bt"><div class="bf na" style="width:25%"></div></div><div class="bv">1 · 6.7%</div></div>
-            <div class="br"><div class="bl">Derecho corporativo</div><div class="bt"><div class="bf na" style="width:25%"></div></div><div class="bv">1 · 6.7%</div></div>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px">
-            <div class="mk"><div class="mkv go">7</div><div class="mkl">Leads con potencial<br>(familia + corp. + migr.)</div></div>
-            <div class="mk"><div class="mkv" style="color:var(--teal)">46.7%</div><div class="mkl">Tasa de calidad<br>sobre 15 leads</div></div>
-            <div class="mk"><div class="mkv" style="color:var(--red)">3</div><div class="mkl">Spam<br>(mismo email: Pablo)</div></div>
-          </div>
-          <div class="co na">⚠ 4 leads de <strong>migración mal-enrutada</strong> llegaron al formulario general (no al de migración). Revisar el flujo de navegación desde la home — hay oportunidad de capturar más leads calificados.</div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Detalle de leads de campañas -->
-    <div class="panel" style="margin-bottom:10px">
-      <div class="ph" style="background:var(--navy)">
-        <h3 style="color:var(--gold)">Leads de Campaña Google Ads — detalle completo (43 formularios con gclid)</h3>
-        <span class="phr" style="color:rgba(255,255,255,.4)">6 agosto – 30 agosto 2026</span>
-      </div>
+    <!-- Inglés -->
+    <div class="panel">
+      <div class="ph" style="background:var(--navy3)"><h3 style="color:var(--gold2)">Migración Inglés · USA + CAN</h3></div>
       <div class="pb0">
-        <table class="t" style="font-size:11px">
-          <thead>
-            <tr>
-              <th>#</th><th>Nombre</th><th>Fecha</th>
-              <th>Extracto del mensaje</th><th>Categoría</th>
-            </tr>
-          </thead>
+        <table class="t">
+          <thead><tr><th>País</th><th class="r">Clics</th></tr></thead>
           <tbody>
-            <!-- RESIDENCIA / RELOCATION -->
-            <tr class="hl"><td>1</td><td class="b">Jonatan Gur</td><td>03/08</td><td>Friendly Nations Visa y cómo trasladar empresa canadiense a Panamá</td><td><span class="tag g">Residencia</span></td></tr>
-            <tr class="hl"><td>2</td><td class="b">Wendy Adkins</td><td>04/08</td><td>Retirement Visa — proceso y costo</td><td><span class="tag g">Residencia</span></td></tr>
-            <tr class="hl"><td>3</td><td class="b">Mayquel Elizarde</td><td>16/08</td><td>Emigrar a Panamá desde Brasil con familia (cubano)</td><td><span class="tag g">Residencia</span></td></tr>
-            <tr class="hl"><td>4</td><td class="b">Henry Cabrera Ventura</td><td>23/08</td><td>Vivir con familia en Panamá</td><td><span class="tag g">Residencia</span></td></tr>
-            <tr class="hl"><td>5</td><td class="b">Massimo Rossi</td><td>24/08</td><td>Cocinero italiano en yates — residencia en Panamá</td><td><span class="tag g">Residencia</span></td></tr>
-            <tr class="hl"><td>6</td><td class="b">John Jairo Cárdenas</td><td>26/08</td><td>Pensionado colombiano interesado en residencia</td><td><span class="tag g">Residencia</span></td></tr>
-            <tr class="hl"><td>7</td><td class="b">Darinka Portocarrero</td><td>30/08</td><td>Trabajo remoto — orientación migratoria</td><td><span class="tag g">Residencia</span></td></tr>
-            <tr class="hl"><td>8</td><td class="b">Frederick</td><td>30/08</td><td>Técnico venezolano quiere mudarse a Panamá</td><td><span class="tag g">Residencia</span></td></tr>
-            <!-- CONSULTA GENÉRICA -->
-            <tr><td>9</td><td>Rosa López Maruri</td><td>04/08</td><td>Requiero orientación migratoria</td><td><span class="tag a">Consulta</span></td></tr>
-            <tr><td>10</td><td>Jorge Conde</td><td>06/08</td><td>Quisiera información</td><td><span class="tag a">Consulta</span></td></tr>
-            <tr><td>11</td><td>Paulina Porres</td><td>08/08</td><td>Agendar consulta legal sin costo</td><td><span class="tag a">Consulta</span></td></tr>
-            <tr><td>12</td><td>Lilian Cueva</td><td>16/08</td><td>Más detalles sobre información migratoria</td><td><span class="tag a">Consulta</span></td></tr>
-            <tr><td>13</td><td>Rheymer Lucena</td><td>17/08</td><td>Cuáles son los trámites para una visa</td><td><span class="tag a">Consulta</span></td></tr>
-            <tr><td>14</td><td>Freddy Núñez Ovalles</td><td>19/08</td><td>Pasos para solicitar visa de Panamá</td><td><span class="tag a">Consulta</span></td></tr>
-            <tr><td>15</td><td>Thalia Cardero</td><td>20/08</td><td>Cómo obtener mi visa a Panamá</td><td><span class="tag a">Consulta</span></td></tr>
-            <tr><td>16</td><td>Lucia Michelle</td><td>24/08</td><td>Cómo aplicar para la visa de Panamá (cubana)</td><td><span class="tag a">Consulta</span></td></tr>
-            <tr><td>17</td><td>Yosney Tejeda</td><td>27/08</td><td>Obtener visa a Panamá siendo cubano</td><td><span class="tag a">Consulta</span></td></tr>
-            <tr><td>18</td><td>Milagros</td><td>29/08</td><td>Realizar una consulta</td><td><span class="tag a">Consulta</span></td></tr>
-            <!-- VISA TURISMO -->
-            <tr><td>19</td><td>Alismelys Pérez</td><td>17/08</td><td>Visa de turismo para cubanos — tarifas</td><td><span class="tag s">Turismo</span></td></tr>
-            <tr><td>20</td><td>Katerin Mesa Justiz</td><td>17/08</td><td>Quiero ir de visita a Panamá</td><td><span class="tag s">Turismo</span></td></tr>
-            <tr><td>21</td><td>Jorge Charbel Kiork</td><td>19/08</td><td>Quisiera ir de paseo</td><td><span class="tag s">Turismo</span></td></tr>
-            <tr><td>22</td><td>Mailin Rodriguez</td><td>21/08</td><td>Visa Autorizada de Turismo para cubano — cotización</td><td><span class="tag s">Turismo</span></td></tr>
-            <tr><td>23</td><td>Lianne Arzola Gamboa</td><td>26/08</td><td>Visa Panamá siendo cubana con residencia en Surinam</td><td><span class="tag s">Turismo</span></td></tr>
-            <tr><td>24</td><td>Yudiany Arias Llaca</td><td>28/08</td><td>Visitar Panamá con fin turístico (vacaciones)</td><td><span class="tag s">Turismo</span></td></tr>
-            <!-- PPT -->
-            <tr><td>25</td><td>Edixon Perez</td><td>11/08</td><td>PPT por primera vez, mayor de edad</td><td><span class="tag s">PPT</span></td></tr>
-            <tr><td>26</td><td>Jhon Miranda</td><td>24/08</td><td>Quiero sacar el PPT</td><td><span class="tag s">PPT</span></td></tr>
-            <tr><td>27</td><td>Emyerbe José</td><td>24/08</td><td>Acceso al PPT por primera vez</td><td><span class="tag s">PPT</span></td></tr>
-            <tr><td>28</td><td>Maryuris Paola</td><td>25/08</td><td>Quiero sacarme el PPT</td><td><span class="tag s">PPT</span></td></tr>
-            <tr><td>29</td><td>Darwin</td><td>27/08</td><td>PPT</td><td><span class="tag s">PPT</span></td></tr>
-            <!-- TRÁNSITO -->
-            <tr><td>30</td><td>Liubar Jay Piedra</td><td>19/08</td><td>Visa de tránsito urgente — vuelo Copa con escala en PTY</td><td><span class="tag s">Tránsito</span></td></tr>
-            <tr><td>31</td><td>Senat Guyana</td><td>19/08</td><td>Haitiano varado en Cuba — visa tránsito hacia China</td><td><span class="tag s">Tránsito</span></td></tr>
-            <!-- CASOS COMPLEJOS -->
-            <tr><td>32</td><td>Isaac Leonardo</td><td>21/08</td><td>Cómo solicitar asilo en Panamá</td><td><span class="tag na" style="background:rgba(30,43,69,.08);color:var(--navy)">Complejo</span></td></tr>
-            <tr><td>33</td><td>Miriam Aguirre</td><td>22/08</td><td>No tiene sello de entrada al país — qué hacer</td><td><span class="tag na" style="background:rgba(30,43,69,.08);color:var(--navy)">Complejo</span></td></tr>
-            <!-- FUERA DE ALCANCE -->
-            <tr><td>34</td><td style="color:var(--txt3)">Jhovoy McKenzie</td><td>06/08</td><td style="color:var(--txt3)">Documento de soltero Jamaica (online)</td><td><span class="tag r">Fuera alcance</span></td></tr>
-            <tr><td>35</td><td style="color:var(--txt3)">Wendy Aviles Rivera</td><td>10/08</td><td style="color:var(--txt3)">Esposo retenido en frontera de EE.UU.</td><td><span class="tag r">Fuera alcance</span></td></tr>
-            <tr><td>36</td><td style="color:var(--txt3)">Dairinayona Rendon</td><td>20/08</td><td style="color:var(--txt3)">Llevar hijo a EE.UU. desde México</td><td><span class="tag r">Fuera alcance</span></td></tr>
-            <tr><td>37</td><td style="color:var(--txt3)">Yorbelis Briceño</td><td>21/08</td><td style="color:var(--txt3)">Obtener nacionalidad colombiana (madre fallecida)</td><td><span class="tag r">Fuera alcance</span></td></tr>
-            <tr><td>38</td><td style="color:var(--txt3)">Claudette Gómez</td><td>23/08</td><td style="color:var(--txt3)">Madre soltera busca rehacer su vida — emprender</td><td><span class="tag r">Fuera alcance</span></td></tr>
-            <tr><td>39</td><td style="color:var(--txt3)">Daniel Miranda</td><td>24/08</td><td style="color:var(--txt3)">Supuesta denuncia (mensaje confuso)</td><td><span class="tag r">Fuera alcance</span></td></tr>
-            <!-- SPAM -->
-            <tr><td>40</td><td style="color:var(--txt3)">Angelica (interna)</td><td>16/07</td><td style="color:var(--txt3)">Hola (email thelegalgrouppanama)</td><td><span class="tag r">Spam</span></td></tr>
-            <tr><td>41</td><td style="color:var(--txt3)">Pablo</td><td>06/08</td><td style="color:var(--txt3)">Lorem ipsum</td><td><span class="tag r">Spam</span></td></tr>
-            <tr><td>42</td><td style="color:var(--txt3)">Wendy Aviles (dup.)</td><td>10/08</td><td style="color:var(--txt3)">"Pa" — mensaje vacío</td><td><span class="tag r">Spam</span></td></tr>
-            <tr><td>43</td><td style="color:var(--txt3)">Jasbleidy Gutiérrez</td><td>18/08</td><td style="color:var(--txt3)">Texto genérico motivacional sin intención legal</td><td><span class="tag r">Spam</span></td></tr>
+            <tr><td class="b">🇨🇦 Canadá</td><td class="r">35</td></tr>
+            <tr><td>🇺🇸 Estados Unidos</td><td class="r">9</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pb">
+        <div class="statg" style="grid-template-columns:repeat(3,1fr);margin-bottom:10px">
+          <div class="stat"><div class="sv">1,196</div><div class="sl">Impr.</div></div>
+          <div class="stat"><div class="sv">44</div><div class="sl">Clics</div></div>
+          <div class="stat"><div class="sv">$58.31</div><div class="sl">Invertidos</div></div>
+        </div>
+        <div class="co go">Canadá concentró la mayor parte del test. El volumen es <strong>insuficiente para determinar potencial real</strong> — requiere presupuesto dedicado y landing optimizada.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 06. GOOGLE ANALYTICS ───────────── -->
+<div class="section">
+  <div class="section-label">
+    <div class="section-num">6</div>
+    <div><div class="section-title">¿Qué pasó dentro del sitio?</div><div class="section-sub">Volumen de tráfico vs. calidad de la visita · GA4 · agosto 2026</div></div>
+  </div>
+  <div class="g23">
+    <div class="panel">
+      <div class="ph"><h3>Canales — sesiones, tráfico y calidad</h3><span class="phr">Tasa interacción + tiempo medio</span></div>
+      <div class="pb0">
+        <table class="t">
+          <thead><tr><th>Canal</th><th class="r">Sesiones</th><th class="r">% Tráfico</th><th class="r">Interacción</th><th class="r">T. medio</th></tr></thead>
+          <tbody>
+            <tr><td>Paid Social</td><td class="r">1,992</td><td class="r">55.39%</td><td class="r">46.29%</td><td class="r">8 s</td></tr>
+            <tr class="hl"><td class="b">Paid Search (Google Ads)</td><td class="r">535</td><td class="r">14.88%</td><td class="r hi">61.31%</td><td class="r hi">29 s</td></tr>
+            <tr><td>Display</td><td class="r">509</td><td class="r">14.15%</td><td class="r">56.58%</td><td class="r">38 s</td></tr>
+            <tr><td>Direct</td><td class="r">137</td><td class="r">3.81%</td><td class="r">35.04%</td><td class="r">15 s</td></tr>
+            <tr><td>Paid Other</td><td class="r">121</td><td class="r">3.36%</td><td class="r">29.75%</td><td class="r">1 s</td></tr>
+            <tr><td class="gr b">Organic Search ⭐</td><td class="r">96</td><td class="r">2.67%</td><td class="r gr">80.21%</td><td class="r gr">57 s</td></tr>
+            <tr><td>Organic Social</td><td class="r">96</td><td class="r">2.67%</td><td class="r">67.71%</td><td class="r">18 s</td></tr>
+            <tr><td>Paid Video</td><td class="r">79</td><td class="r">2.20%</td><td class="r">22.78%</td><td class="r">31 s</td></tr>
+            <tr><td>Referral</td><td class="r">37</td><td class="r">1.03%</td><td class="r gr">78.38%</td><td class="r">11 s</td></tr>
           </tbody>
         </table>
       </div>
     </div>
-
-    <!-- Nota metodológica + lead quality summary -->
-    <div class="g2">
-      <div class="co na">
-        📌 <strong>Nota metodológica:</strong> Solo el Formulario Migración tiene parámetros gclid/gad_campaignid — es el único 100% atribuible a Google Ads. El Formulario General (15 leads) corresponde a tráfico orgánico/directo. Los conteos son manuales sobre el contenido de cada correo; no reflejan tasa de conversión a cliente.
-      </div>
-      <div class="co go">
-        💡 <strong>Hallazgo clave:</strong> De los 43 leads pagados, 18 son calificados (41.9%). El perfil dominante es el <strong>extranjero latinoamericano buscando residencia o relocation en Panamá</strong> — exactamente el avatar que justifica la campaña. El segmento cubano es el de mayor volumen individual (visa turismo + consultas).
-      </div>
-    </div>
-  </section>
-
-  <!-- ⑨ RECOMENDACIONES -->
-
-  <section class="s" id="recs">
-    <div class="s-head">
-      <div class="s-title">Recomendaciones para septiembre</div>
-      <div class="s-sub">Ordenadas por impacto esperado</div>
-    </div>
-    <div class="g2">
-      <div class="panel">
-        <div class="ph" style="background:var(--navy)"><h3 style="color:var(--gold)">Acciones inmediatas</h3></div>
-        <div class="pb">
-          <div class="rec"><div class="rn">1</div><div><div class="rt">Aumentar presupuesto campaña LATAM</div><div class="rd">De US$9.90 a US$14–18/día. Google la marca como limitada por volumen. Proyección: +40–60% en leads al mismo CPC de US$0.22.</div></div></div>
-          <div class="rec"><div class="rn">2</div><div><div class="rt">Corregir "generation_lead" en Google Ads</div><div class="rd">Marcada como "Configuración incorrecta". Sus datos no son confiables. También verificar Form_home y clic_descubre_servicios.</div></div></div>
-          <div class="rec"><div class="rn">3</div><div><div class="rt">Investigar el 404 que afecta a 15 usuarios</div><div class="rd">Probable enlace roto en un anuncio activo. Cada clic a un 404 es presupuesto desperdiciado.</div></div></div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="insight">
+        <div class="insight-icon">🔍</div>
+        <div class="insight-body">
+          <h4>Paid Search = mayor calidad de visita</h4>
+          <p>Paid Search registró 61.3% de tasa de interacción y 29 s promedio. Organic Search alcanzó 80.2% y 57 s, reflejando interés sostenido por explorar el contenido de TLAGP.</p>
         </div>
       </div>
       <div class="panel">
-        <div class="ph" style="background:var(--navy)"><h3 style="color:var(--gold)">Optimización y crecimiento</h3></div>
+        <div class="ph"><h3>Usuarios por país (sitio completo)</h3><span class="phr">3,160 usuarios activos</span></div>
         <div class="pb">
-          <div class="rec"><div class="rn">4</div><div><div class="rt">Escalar "abogados de migracion en panama"</div><div class="rd">66.67% de conversión con solo ~9 clics. Crear variaciones de alta intención y asignar presupuesto específico.</div></div></div>
-          <div class="rec"><div class="rn">5</div><div><div class="rt">Landing en inglés antes de reactivar USA/CAN</div><div class="rd">Anuncio en inglés → sitio en español = US$58.31 gastados, 0 conversiones. La demanda existe (79 clics a US$1.33 CPC).</div></div></div>
-          <div class="rec"><div class="rn">6</div><div><div class="rt">Vincular GA4 a la cuenta de Google Ads</div><div class="rd">Hoy dice "Medición: Ninguno". Vincularla permite reportar tiempo en sitio y comportamiento post-clic por keyword.</div></div></div>
+          <div class="bc">
+            <div class="br"><div class="bl">🇨🇴 Colombia</div><div class="bt"><div class="bf na" style="width:100%"></div></div><div class="bv">1,211 · 38.3%</div></div>
+            <div class="br"><div class="bl">🇪🇨 Ecuador</div><div class="bt"><div class="bf na" style="width:44%"></div></div><div class="bv">537 · 17.0%</div></div>
+            <div class="br"><div class="bl">🇵🇦 Panamá</div><div class="bt"><div class="bf go" style="width:24%"></div></div><div class="bv">293 · 9.3%</div></div>
+            <div class="br"><div class="bl">🇺🇸 Estados Unidos</div><div class="bt"><div class="bf st" style="width:19%"></div></div><div class="bv">227 · 7.2%</div></div>
+            <div class="br"><div class="bl">🇲🇽 México</div><div class="bt"><div class="bf st" style="width:15%"></div></div><div class="bv">186 · 5.9%</div></div>
+            <div class="br"><div class="bl">🇵🇪 Perú</div><div class="bt"><div class="bf st" style="width:14%"></div></div><div class="bv">166 · 5.3%</div></div>
+            <div class="br"><div class="bl">🇦🇷 Argentina</div><div class="bt"><div class="bf st" style="width:9%"></div></div><div class="bv">114 · 3.6%</div></div>
+          </div>
+          <div class="co na" style="margin-top:10px">Ecuador es el <strong>segundo país en presencia web</strong> sin ser foco principal de Search — merece seguimiento activo.</div>
         </div>
       </div>
     </div>
-
-    <!-- Cierre -->
-    <div style="margin-top:12px;background:var(--navy);border-radius:8px;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px">
-      <div>
-        <div style="font-family:'Poppins',sans-serif;font-size:15px;font-weight:900;color:var(--white);margin-bottom:4px">Agosto fue eficiente.</div>
-        <div style="font-size:11.5px;color:rgba(255,255,255,.5);max-width:560px;line-height:1.55">136 conversiones a US$2.64 cada una con una sola campaña activa. Con los ajustes de configuración pendientes y un pequeño aumento de presupuesto, septiembre puede duplicar los leads sin cambiar la estrategia central.</div>
-      </div>
-      <div style="text-align:right;flex-shrink:0">
-        <div style="font-family:'Poppins',sans-serif;font-size:30px;font-weight:900;color:var(--gold)">US$1.96</div>
-        <div style="font-size:9.5px;color:rgba(255,255,255,.38);line-height:1.4">costo por conversión<br>campaña principal</div>
-      </div>
-    </div>
-  </section>
-
-  <div class="footer">
-    <span>The Legal Agency Group Panamá · Google Ads 523-163-4262 · GA4 · Agosto 2026</span>
-    <span>Preparado por Al Dente Marketing Studio</span>
   </div>
-</main>
+</div>
 
-<script>
-const sections = document.querySelectorAll('section[id]');
-const navItems = document.querySelectorAll('.nav-item[href]');
-const main = document.querySelector('.main');
+<!-- ── 07. LISTADO DE LEADS ──────────────── -->
+<div class="section">
+  <div class="section-label">
+    <div class="section-num">7</div>
+    <div><div class="section-title">Listado de leads — Formularios</div><div class="section-sub">43 leads con gclid · 15 orgánicos · 6–30 agosto 2026</div></div>
+  </div>
 
-main.addEventListener('scroll', () => {
-  let cur = '';
-  sections.forEach(s => {
-    if (main.scrollTop + 70 >= s.offsetTop) cur = s.id;
-  });
-  navItems.forEach(n => {
-    const id = n.getAttribute('href').slice(1);
-    n.classList.toggle('active', id === cur || (id === 'ga4' && cur === 'canales'));
-  });
-});
+  <!-- Resumen visual -->
+  <div class="g2" style="margin-bottom:14px">
+    <div class="panel">
+      <div class="ph" style="background:var(--navy)"><h3 style="color:var(--gold)">Formulario Migración</h3><span style="font-size:10px;color:rgba(255,255,255,.4)">43 leads con gclid</span></div>
+      <div class="pb">
+        <div class="bc" style="margin-bottom:12px">
+          <div class="br"><div class="bl">Consulta genérica</div><div class="bt"><div class="bf st" style="width:100%"></div></div><div class="bv">10 · 23.3%</div></div>
+          <div class="br"><div class="bl">Residencia / relocation</div><div class="bt"><div class="bf te" style="width:80%"></div></div><div class="bv">8 · 18.6%</div></div>
+          <div class="br"><div class="bl">Visa de turismo</div><div class="bt"><div class="bf go" style="width:60%"></div></div><div class="bv">6 · 14.0%</div></div>
+          <div class="br"><div class="bl">Fuera de alcance</div><div class="bt"><div class="bf rd" style="width:60%"></div></div><div class="bv">6 · 14.0%</div></div>
+          <div class="br"><div class="bl">Trámite PPT</div><div class="bt"><div class="bf na" style="width:50%"></div></div><div class="bv">5 · 11.6%</div></div>
+          <div class="br"><div class="bl">Spam / baja calidad</div><div class="bt"><div class="bf rd" style="width:40%"></div></div><div class="bv">4 · 9.3%</div></div>
+          <div class="br"><div class="bl">Casos complejos</div><div class="bt"><div class="bf na" style="width:20%"></div></div><div class="bv">2 · 4.7%</div></div>
+          <div class="br"><div class="bl">Visa de tránsito</div><div class="bt"><div class="bf na" style="width:20%"></div></div><div class="bv">2 · 4.7%</div></div>
+        </div>
 
-navItems.forEach(item => {
-  item.addEventListener('click', e => {
-    e.preventDefault();
-    const id = item.getAttribute('href').slice(1);
-    const el = document.getElementById(id);
-    if (el) main.scrollTo({ top: el.offsetTop - 4, behavior: 'smooth' });
-  });
-});
-</script>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="ph" style="background:var(--steel)"><h3 style="color:#fff">Formulario Contáctenos</h3><span style="font-size:10px;color:rgba(255,255,255,.4)">15 leads sin gclid</span></div>
+      <div class="pb">
+        <div class="bc" style="margin-bottom:12px">
+          <div class="br"><div class="bl">Ambiguo / sin info</div><div class="bt"><div class="bf st" style="width:100%"></div></div><div class="bv">4 · 26.7%</div></div>
+          <div class="br"><div class="bl">Migración mal-enrutada</div><div class="bt"><div class="bf te" style="width:100%"></div></div><div class="bv">4 · 26.7%</div></div>
+          <div class="br"><div class="bl">Spam</div><div class="bt"><div class="bf rd" style="width:75%"></div></div><div class="bv">3 · 20.0%</div></div>
+          <div class="br"><div class="bl">Derecho de familia</div><div class="bt"><div class="bf go" style="width:50%"></div></div><div class="bv">2 · 13.3%</div></div>
+          <div class="br"><div class="bl">Derecho penal</div><div class="bt"><div class="bf na" style="width:25%"></div></div><div class="bv">1 · 6.7%</div></div>
+          <div class="br"><div class="bl">Derecho corporativo</div><div class="bt"><div class="bf na" style="width:25%"></div></div><div class="bv">1 · 6.7%</div></div>
+        </div>
+        <div class="statg">
+          <div class="stat"><div class="sv go">7</div><div class="sl">Con potencial</div></div>
+          <div class="stat"><div class="sv te">46.7%</div><div class="sl">Tasa de calidad</div></div>
+          <div class="stat"><div class="sv" style="color:var(--red)">3</div><div class="sl">Spam (mismo email)</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabla detalle leads Migración (43) -->
+  <div class="panel" style="margin-bottom:10px">
+    <div class="ph" style="background:var(--navy)">
+      <h3 style="color:var(--gold)">Detalle completo — Formulario Migración · 43 leads con gclid</h3>
+      <span style="font-size:10px;color:rgba(255,255,255,.4)">Solo el Formulario Migración es atribuible 100% a Google Ads</span>
+    </div>
+    <div class="pb0">
+      <table class="t" style="font-size:11px">
+        <thead>
+          <tr><th>#</th><th>Nombre</th><th>Fecha</th><th>Extracto del mensaje</th><th>Categoría</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hl"><td>1</td><td class="b">Jonatan Gur</td><td>03/08</td><td>Friendly Nations Visa y cómo trasladar empresa canadiense a Panamá</td><td><span class="tag g">Residencia</span></td></tr>
+          <tr class="hl"><td>2</td><td class="b">Wendy Adkins</td><td>04/08</td><td>Retirement Visa — proceso y costo</td><td><span class="tag g">Residencia</span></td></tr>
+          <tr class="hl"><td>3</td><td class="b">Mayquel Elizarde</td><td>16/08</td><td>Emigrar a Panamá desde Brasil con familia (cubano)</td><td><span class="tag g">Residencia</span></td></tr>
+          <tr class="hl"><td>4</td><td class="b">Henry Cabrera Ventura</td><td>23/08</td><td>Vivir con familia en Panamá</td><td><span class="tag g">Residencia</span></td></tr>
+          <tr class="hl"><td>5</td><td class="b">Massimo Rossi</td><td>24/08</td><td>Cocinero italiano en yates — residencia en Panamá</td><td><span class="tag g">Residencia</span></td></tr>
+          <tr class="hl"><td>6</td><td class="b">John Jairo Cárdenas</td><td>26/08</td><td>Pensionado colombiano interesado en residencia</td><td><span class="tag g">Residencia</span></td></tr>
+          <tr class="hl"><td>7</td><td class="b">Darinka Portocarrero</td><td>30/08</td><td>Trabajo remoto — orientación migratoria</td><td><span class="tag g">Residencia</span></td></tr>
+          <tr class="hl"><td>8</td><td class="b">Frederick</td><td>30/08</td><td>Técnico venezolano quiere mudarse a Panamá</td><td><span class="tag g">Residencia</span></td></tr>
+          <tr><td>9</td><td>Rosa López Maruri</td><td>04/08</td><td>Requiero orientación migratoria</td><td><span class="tag a">Consulta</span></td></tr>
+          <tr><td>10</td><td>Jorge Conde</td><td>06/08</td><td>Quisiera información</td><td><span class="tag a">Consulta</span></td></tr>
+          <tr><td>11</td><td>Paulina Porres</td><td>08/08</td><td>Agendar consulta legal sin costo</td><td><span class="tag a">Consulta</span></td></tr>
+          <tr><td>12</td><td>Lilian Cueva</td><td>16/08</td><td>Más detalles sobre información migratoria</td><td><span class="tag a">Consulta</span></td></tr>
+          <tr><td>13</td><td>Rheymer Lucena</td><td>17/08</td><td>Cuáles son los trámites para una visa</td><td><span class="tag a">Consulta</span></td></tr>
+          <tr><td>14</td><td>Freddy Núñez Ovalles</td><td>19/08</td><td>Pasos para solicitar visa de Panamá</td><td><span class="tag a">Consulta</span></td></tr>
+          <tr><td>15</td><td>Thalia Cardero</td><td>20/08</td><td>Cómo obtener mi visa a Panamá</td><td><span class="tag a">Consulta</span></td></tr>
+          <tr><td>16</td><td>Lucia Michelle</td><td>24/08</td><td>Cómo aplicar para la visa de Panamá (cubana)</td><td><span class="tag a">Consulta</span></td></tr>
+          <tr><td>17</td><td>Yosney Tejeda</td><td>27/08</td><td>Obtener visa a Panamá siendo cubano</td><td><span class="tag a">Consulta</span></td></tr>
+          <tr><td>18</td><td>Milagros</td><td>29/08</td><td>Realizar una consulta</td><td><span class="tag a">Consulta</span></td></tr>
+          <tr><td>19</td><td>Alismelys Pérez</td><td>17/08</td><td>Visa de turismo para cubanos — tarifas</td><td><span class="tag s">Turismo</span></td></tr>
+          <tr><td>20</td><td>Katerin Mesa Justiz</td><td>17/08</td><td>Quiero ir de visita a Panamá</td><td><span class="tag s">Turismo</span></td></tr>
+          <tr><td>21</td><td>Jorge Charbel Kiork</td><td>19/08</td><td>Quisiera ir de paseo</td><td><span class="tag s">Turismo</span></td></tr>
+          <tr><td>22</td><td>Mailin Rodriguez</td><td>21/08</td><td>Visa Autorizada de Turismo para cubano — cotización</td><td><span class="tag s">Turismo</span></td></tr>
+          <tr><td>23</td><td>Lianne Arzola Gamboa</td><td>26/08</td><td>Visa Panamá siendo cubana con residencia en Surinam</td><td><span class="tag s">Turismo</span></td></tr>
+          <tr><td>24</td><td>Yudiany Arias Llaca</td><td>28/08</td><td>Visitar Panamá con fin turístico</td><td><span class="tag s">Turismo</span></td></tr>
+          <tr><td>25</td><td>Edixon Perez</td><td>11/08</td><td>PPT por primera vez, mayor de edad</td><td><span class="tag s">PPT</span></td></tr>
+          <tr><td>26</td><td>Jhon Miranda</td><td>24/08</td><td>Quiero sacar el PPT</td><td><span class="tag s">PPT</span></td></tr>
+          <tr><td>27</td><td>Emyerbe José</td><td>24/08</td><td>Acceso al PPT por primera vez</td><td><span class="tag s">PPT</span></td></tr>
+          <tr><td>28</td><td>Maryuris Paola</td><td>25/08</td><td>Quiero sacarme el PPT</td><td><span class="tag s">PPT</span></td></tr>
+          <tr><td>29</td><td>Darwin</td><td>27/08</td><td>PPT</td><td><span class="tag s">PPT</span></td></tr>
+          <tr><td>30</td><td>Liubar Jay Piedra</td><td>19/08</td><td>Visa de tránsito urgente — vuelo Copa con escala en PTY</td><td><span class="tag s">Tránsito</span></td></tr>
+          <tr><td>31</td><td>Senat Guyana</td><td>19/08</td><td>Haitiano varado en Cuba — visa tránsito hacia China</td><td><span class="tag s">Tránsito</span></td></tr>
+          <tr><td>32</td><td>Isaac Leonardo</td><td>21/08</td><td>Cómo solicitar asilo en Panamá</td><td><span class="tag" style="background:rgba(30,43,69,.08);color:var(--navy)">Complejo</span></td></tr>
+          <tr><td>33</td><td>Miriam Aguirre</td><td>22/08</td><td>No tiene sello de entrada al país — qué hacer</td><td><span class="tag" style="background:rgba(30,43,69,.08);color:var(--navy)">Complejo</span></td></tr>
+          <tr><td style="color:var(--txt3)">34</td><td style="color:var(--txt3)">Jhovoy McKenzie</td><td style="color:var(--txt3)">06/08</td><td style="color:var(--txt3)">Documento de soltero Jamaica (online)</td><td><span class="tag r">Fuera</span></td></tr>
+          <tr><td style="color:var(--txt3)">35</td><td style="color:var(--txt3)">Wendy Aviles Rivera</td><td style="color:var(--txt3)">10/08</td><td style="color:var(--txt3)">Esposo retenido en frontera de EE.UU.</td><td><span class="tag r">Fuera</span></td></tr>
+          <tr><td style="color:var(--txt3)">36</td><td style="color:var(--txt3)">Dairinayona Rendon</td><td style="color:var(--txt3)">20/08</td><td style="color:var(--txt3)">Llevar hijo a EE.UU. desde México</td><td><span class="tag r">Fuera</span></td></tr>
+          <tr><td style="color:var(--txt3)">37</td><td style="color:var(--txt3)">Yorbelis Briceño</td><td style="color:var(--txt3)">21/08</td><td style="color:var(--txt3)">Obtener nacionalidad colombiana (madre fallecida)</td><td><span class="tag r">Fuera</span></td></tr>
+          <tr><td style="color:var(--txt3)">38</td><td style="color:var(--txt3)">Claudette Gómez</td><td style="color:var(--txt3)">23/08</td><td style="color:var(--txt3)">Madre soltera busca emprender — sin relación con migración</td><td><span class="tag r">Fuera</span></td></tr>
+          <tr><td style="color:var(--txt3)">39</td><td style="color:var(--txt3)">Daniel Miranda</td><td style="color:var(--txt3)">24/08</td><td style="color:var(--txt3)">Supuesta denuncia (mensaje confuso)</td><td><span class="tag r">Fuera</span></td></tr>
+          <tr><td style="color:var(--txt3)">40</td><td style="color:var(--txt3)">Angelica (interna)</td><td style="color:var(--txt3)">16/07</td><td style="color:var(--txt3)">Hola (email @thelegalgrouppanama)</td><td><span class="tag r">Spam</span></td></tr>
+          <tr><td style="color:var(--txt3)">41</td><td style="color:var(--txt3)">Pablo</td><td style="color:var(--txt3)">06/08</td><td style="color:var(--txt3)">Lorem ipsum</td><td><span class="tag r">Spam</span></td></tr>
+          <tr><td style="color:var(--txt3)">42</td><td style="color:var(--txt3)">Wendy Aviles (dup.)</td><td style="color:var(--txt3)">10/08</td><td style="color:var(--txt3)">"Pa" — mensaje vacío</td><td><span class="tag r">Spam</span></td></tr>
+          <tr><td style="color:var(--txt3)">43</td><td style="color:var(--txt3)">Jasbleidy Gutiérrez</td><td style="color:var(--txt3)">18/08</td><td style="color:var(--txt3)">Texto genérico motivacional sin intención legal</td><td><span class="tag r">Spam</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Detalle leads Formulario General (15) -->
+  <div class="panel">
+    <div class="ph" style="background:var(--steel)">
+      <h3 style="color:#fff">Detalle completo — Formulario Contáctenos · 15 leads sin gclid</h3>
+      <span style="font-size:10px;color:rgba(255,255,255,.4)">Tráfico orgánico/directo · no atribuible a Google Ads</span>
+    </div>
+    <div class="pb0">
+      <table class="t" style="font-size:11px">
+        <thead>
+          <tr><th>#</th><th>Nombre</th><th>Fecha</th><th>Extracto del mensaje</th><th>Categoría</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hl"><td>1</td><td class="b">Eliomar Infante</td><td>06/08</td><td>3 visas de tránsito para Panamá — honorarios</td><td><span class="tag g">Migr. mal-enrut.</span></td></tr>
+          <tr class="hl"><td>2</td><td class="b">Alfredo Isaac Gómez</td><td>10/08</td><td>Abogado colombiano empresario — migrar a Panamá</td><td><span class="tag g">Migr. mal-enrut.</span></td></tr>
+          <tr class="hl"><td>3</td><td class="b">Galo</td><td>23/08</td><td>Asesoría para residencia para jubilados</td><td><span class="tag g">Migr. mal-enrut.</span></td></tr>
+          <tr class="hl"><td>4</td><td class="b">Aliya Roberts</td><td>25/08</td><td>Ciudadana india con Green Card, barco familiar en Colombia — visa 180 días San Blas</td><td><span class="tag g">Migr. mal-enrut.</span></td></tr>
+          <tr><td>5</td><td>Paulette Jimenez</td><td>05/08</td><td>Divorciarse sin infidelidad ni violencia — situación económica y legal compleja</td><td><span class="tag a">Familia</span></td></tr>
+          <tr><td>6</td><td>Maik Thachar</td><td>05/08</td><td>Pensión alimenticia y custodia compartida — la madre exige más dinero</td><td><span class="tag a">Familia</span></td></tr>
+          <tr><td style="color:var(--txt3)">7</td><td style="color:var(--txt3)">Pablo</td><td style="color:var(--txt3)">06/08</td><td style="color:var(--txt3)">lorem ipsum</td><td><span class="tag r">Spam</span></td></tr>
+          <tr><td style="color:var(--txt3)">8</td><td style="color:var(--txt3)">Pablo</td><td style="color:var(--txt3)">06/08</td><td style="color:var(--txt3)">lorem</td><td><span class="tag r">Spam</span></td></tr>
+          <tr><td style="color:var(--txt3)">9</td><td style="color:var(--txt3)">Pablo</td><td style="color:var(--txt3)">06/08</td><td style="color:var(--txt3)">Lorem</td><td><span class="tag r">Spam</span></td></tr>
+          <tr><td style="color:var(--txt3)">10</td><td style="color:var(--txt3)">Jeiderjahin Burbano</td><td style="color:var(--txt3)">04/08</td><td style="color:var(--txt3)">Quiero ver a mi familia</td><td><span class="tag r">Ambiguo</span></td></tr>
+          <tr><td style="color:var(--txt3)">11</td><td style="color:var(--txt3)">Jair</td><td style="color:var(--txt3)">06/08</td><td style="color:var(--txt3)">Buenas noches, ¿cómo están? Disculpe, ¿cómo aplicar?</td><td><span class="tag r">Ambiguo</span></td></tr>
+          <tr><td style="color:var(--txt3)">12</td><td style="color:var(--txt3)">Yadira Itzel Vega</td><td style="color:var(--txt3)">09/08</td><td style="color:var(--txt3)">Cómo recibo el dinero</td><td><span class="tag r">Ambiguo</span></td></tr>
+          <tr><td style="color:var(--txt3)">13</td><td style="color:var(--txt3)">Alvaro Gallón</td><td style="color:var(--txt3)">10/08</td><td style="color:var(--txt3)">Presidente de Fundación Social Galeona de Cádiz</td><td><span class="tag r">Ambiguo</span></td></tr>
+          <tr><td>14</td><td>Yerson Caraballo</td><td>14/08</td><td>Necesito orientación para un caso del que me acusan</td><td><span class="tag s">Penal</span></td></tr>
+          <tr><td>15</td><td>Emilio Mesa</td><td>14/08</td><td>Empresa panameña suspendida desde 2021 — reactivarla para vender propiedad en Brasil</td><td><span class="tag s">Corporativo</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="co na" style="margin-top:10px">
+    📌 <strong>Nota metodológica:</strong> Solo el Formulario Migración tiene parámetros gclid/gad_campaignid — es el único 100% atribuible a Google Ads. El Formulario General (15 leads) corresponde a tráfico orgánico/directo. Los conteos son manuales sobre el contenido de cada correo recibido y no reflejan tasa de conversión a cliente.
+  </div>
+</div>
+
+<!-- ── 08. LEADS RELEVANTES ──────────────── -->
+<div class="section">
+  <div class="section-label">
+    <div class="section-num">8</div>
+    <div>
+      <div class="section-title">Leads relevantes — Consultas — Cierres</div>
+      <div class="section-sub">El siguiente paso para conectar la inversión de marketing con resultados comerciales reales</div>
+    </div>
+  </div>
+  <div class="g2">
+    <div class="panel">
+      <div class="ph" style="background:var(--navy)"><h3 style="color:var(--gold2)">Leads relevantes → Consultas → Cierres</h3></div>
+      <div class="pb">
+        <div style="text-align:center;padding:20px 0">
+          <div style="font-family:'Poppins',sans-serif;font-size:64px;font-weight:900;color:rgba(30,43,69,.12);line-height:1">?</div>
+          <div style="font-size:12px;color:var(--txt2);margin-top:8px;line-height:1.6;max-width:280px;margin-inline:auto">Esta información todavía no está disponible. Con ella podremos cerrar el ciclo de atribución completo.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">
+          <div class="stat" style="text-align:center">
+            <div class="sv go" style="font-size:26px">58</div>
+            <div class="sl">Formularios recibidos</div>
+          </div>
+          <div class="stat" style="text-align:center">
+            <div class="sv" style="font-size:26px;color:rgba(30,43,69,.2)">?</div>
+            <div class="sl">Leads relevantes</div>
+          </div>
+          <div class="stat" style="text-align:center">
+            <div class="sv" style="font-size:26px;color:rgba(30,43,69,.2)">?</div>
+            <div class="sl">Consultas realizadas</div>
+          </div>
+          <div class="stat" style="text-align:center">
+            <div class="sv" style="font-size:26px;color:rgba(30,43,69,.2)">?</div>
+            <div class="sl">Clientes cerrados</div>
+          </div>
+        </div>
+        <div class="co na">
+          Para cada uno de los 58 formularios necesitamos:<br>
+          <strong>¿Relevante? · ¿Consulta? · ¿Contrató? · ¿Qué servicio? · ¿Qué país?</strong>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="ph" style="background:var(--navy)"><h3 style="color:var(--gold2)">¿Por qué importa este dato?</h3></div>
+      <div class="pb">
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px">
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <span style="color:var(--gold);font-weight:900;font-size:16px;flex-shrink:0">→</span>
+            <span style="font-size:12.5px;color:var(--txt2);line-height:1.5">¿El lead fue relevante para el negocio?</span>
+          </div>
+          <div class="div"></div>
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <span style="color:var(--gold);font-weight:900;font-size:16px;flex-shrink:0">→</span>
+            <span style="font-size:12.5px;color:var(--txt2);line-height:1.5">¿Llegó a consulta con el equipo?</span>
+          </div>
+          <div class="div"></div>
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <span style="color:var(--gold);font-weight:900;font-size:16px;flex-shrink:0">→</span>
+            <span style="font-size:12.5px;color:var(--txt2);line-height:1.5">¿Contrató? ¿Qué servicio?</span>
+          </div>
+          <div class="div"></div>
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <span style="color:var(--gold);font-weight:900;font-size:16px;flex-shrink:0">→</span>
+            <span style="font-size:12.5px;color:var(--txt2);line-height:1.5">¿De qué país provenía?</span>
+          </div>
+          <div class="div"></div>
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <span style="color:var(--gold);font-weight:900;font-size:16px;flex-shrink:0">→</span>
+            <span style="font-size:12.5px;color:var(--txt2);line-height:1.5">¿Qué valor generó?</span>
+          </div>
+        </div>
+        <div class="co go">Con esta información podremos <strong>conectar la inversión de marketing con resultados comerciales</strong> e identificar qué búsquedas y mercados generan mayor valor para TLAGP.</div>
+        <div class="co rd" style="margin-top:8px">⚠️ <strong>Landing externa pendiente:</strong> Una campaña dirigía tráfico a una landing externa. Validar esos leads con el proveedor que la administra.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 09. PRÓXIMOS PASOS ──────────────── -->
+<div class="section">
+  <div class="section-label">
+    <div class="section-num">9</div>
+    <div><div class="section-title">Próximos pasos</div><div class="section-sub">Acciones concretas para conectar marketing con resultados comerciales</div></div>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-n">1</div>
+      <div>
+        <div class="step-t">Completar la atribución</div>
+        <div class="step-d">Solicitar al proveedor de la landing externa la identificación de los leads provenientes de Google Search, y cruzarlos con los 58 formularios ya identificados.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div>
+        <div class="step-t">Conectar marketing con ventas</div>
+        <div class="step-d">Cruzar los formularios generados con el estatus comercial reportado por TLAGP (¿relevante? → ¿consulta? → ¿cierre? → ¿valor?). Este dato define el ROI real de la inversión.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div>
+        <div class="step-t">Mantener el foco en Servicios Migratorios</div>
+        <div class="step-d">Continuar optimizando el servicio priorizado antes de abrir nuevos frentes, salvo que la información comercial indique una oportunidad más valiosa en otro servicio o mercado.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div>
+        <div class="step-t">Invertir según valor, no únicamente volumen</div>
+        <div class="step-d">Utilizar la combinación búsqueda + mercado + lead + cierre para decidir dónde concentrar el presupuesto del siguiente período. Ecuador merece seguimiento como mercado emergente.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<footer class="footer">
+  <div class="fl">
+    <img src="data:image/png;base64,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" alt="TLAGP" style="height:22px;filter:brightness(0) invert(1);opacity:.45">
+    <span style="font-size:10px;color:rgba(255,255,255,.3)">The Legal Agency Group Panamá · Reporte Agosto 2026</span>
+  </div>
+  <div class="fr">Preparado por Al Dente Marketing Studio<br>Datos: Google Ads + GA4 · 1–30 agosto 2026</div>
+</footer>
+
 </body>
 </html>
